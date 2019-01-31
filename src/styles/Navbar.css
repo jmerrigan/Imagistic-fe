@@ -7,14 +7,14 @@
 /*} */
 
 .logo {
-    
-        margin-left: 1em;
-        padding-top: 0em;
-        font-size: 20px;
-        font-weight: 700;
-        letter-spacing: 0.5em;
-      
+    margin-top: 2.3em;
+    /* margin-left: 4.5em; */
+    /* padding-top: 0em; */
+    /* font-size: 2em; */
+    /* font-weight: 700; */
+    /* letter-spacing: 0.5em; */
 }
+
 /* 
 .nav_links {
     margin-right: 5%;
@@ -37,7 +37,7 @@
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
-  color: black;
+  color: #36454F;
   float: right;
   margin: 0.7em;
   margin-top: -1.5em;
@@ -51,22 +51,34 @@
   transition: color 2s ease-out; */
 }
 
-.navBar a:hover {
+.navBar .navBarLinks:hover {
   background-color:orangered;
   color: white;
 } 
+
+.imagisticLogo {
+    margin-top: 10em;
+    margin-left: 5vw;
+    font-size: 2.5em;
+    font-weight: 800;
+    letter-spacing: 10px;
+    text-decoration: none;
+    color: #36454F;
+}
 /* End of Navbar */
 
 
 /* portrait */
 @media only screen and (max-width: 661px) {
-    .body{
-      height: 100%;
-      width: 100vw;
-      margin: 0 auto;
+    .imagisticLogo {
+        font-size: 1em;
+        margin-right: 3em;
+        margin-left: 0;
     }
     .navBar{
         width: 100vw;
+        margin-bottom: 0;
+        /* text-align: center; */
     }
     .logo {
         width: 100vw;
@@ -75,65 +87,61 @@
         font-size: 2.5em;
         font-weight: 700;
         letter-spacing: 0em;
-}
+        margin-right: 6em;
+        margin-left: 0;
+    }
+    .navLinkContainer {
+        display: flex;
+    }
     .navBarLinks {
         font-size: 1em;
         font-weight: 0;
-        margin-top: 0.1em;
-        margin-left: -1em;
-        margin-right: 0.2em;
-        padding-right: 0em;
-        text-align: center;
+        margin-top: 0.5em;
+        margin-left: 1.3em;
+        /* text-align: center; */
         text-transform: uppercase;
         text-decoration: none;
-        color: black;
-        float: right;
-  -webkit-transition: background-color 2s ease-out;
-  -moz-transition: background-color 2s ease-out;
-  -o-transition: background-color 2s ease-out;
-  transition: background-color 2s ease-out;
+        color: #36454F;
+        /* float: right; */
+        -webkit-transition: background-color 2s ease-out;
+        -moz-transition: background-color 2s ease-out;
+        -o-transition: background-color 2s ease-out;
+        transition: background-color 2s ease-out;
     }
 
 }
 
 /* Landscape */
 @media only screen and (max-height: 414px) {
-    .body{
-      height: 100%;
-      width: 100vw;
-      margin: 0 auto;
-    }
     .logo {
         width: 100vw;
         text-align: left;
         margin-top: 0.1em;
-        margin-left: 0.3em;
+        margin-left: 0;
         font-size: 2.5em;
         font-weight: 700;
         letter-spacing: 0em; 
+        text-align: center;
+    }
+    .navBar {
+        display: flex;
     }
     .navBarLinks {
         font-size: 1em;
         font-weight: 0;
-        margin-top: -2em;
-        margin-left: 0.5em;
-        margin-right: 0.2em;
+        /* margin-top: -2em; */
+        margin-left: 1em;
+        margin-right: 1em;
         padding-right: 0em;
         text-align: center;
         text-transform: uppercase;
         text-decoration: none;
-        color: black;
+        color: #36454F;
         float: right;
     -webkit-transition: background-color 2s ease-out;
     -moz-transition: background-color 2s ease-out;
     -o-transition: background-color 2s ease-out;
     transition: background-color 2s ease-out;
     }
-
-
-
-
-
-
 
 }

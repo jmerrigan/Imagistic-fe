@@ -1,8 +1,9 @@
-body{
+.contactPageContainer {
   font-family: 'Poppins', sans-serif;
   height: 100%;
   width: 100vw;
-  margin: 0 auto;
+  margin: 0;
+  overflow: hidden;
 }
 .contactContainer {
   display: flex;
@@ -11,15 +12,23 @@ body{
   justify-content: space-around;
   align-items: flex-start;
   width: 100% !important;
-  padding-top: 5em;
+  padding-top: 4em;
+}
+
+.contactHeading {
+  color: #36454F;
+  font-size: 1.6em;
+  font-weight: 400;
+  margin: 0%;
 }
 
 .contactPicture {
   height: 30em;
   width: 30em;
-  background-color:red;
+  /* background-color:red; */
   box-sizing: border-box;
   margin: 0 auto;
+  /* margin-top: 1em; */
   background-image: url('https://www.imagistic.com.au/img/s/v-5/u885882931-o695099713-53.jpg');
   /* (../sampleGroupPic.png); */
   background-size: cover;
@@ -28,7 +37,7 @@ body{
 .contact {
   height: 30em;
   width: 30em;
-  background-color:lightgreen;
+  /* background-color:lightgreen; */
   box-sizing: border-box;
   margin: 0 auto;
 }
@@ -45,39 +54,44 @@ body{
   position: relative;
   margin-left: 0.2em;
   margin-right: 0.9em;
+  margin-bottom: 1em;
   padding-top: 0em;
   margin-top: 0em;  
   border-bottom: 2px solid #fa7268;
 }
 
+.contactForm {
+  text-align: center;
+  margin-top: 4em;
+}
+
 .contactForm input {
-  position: relative;
-  display: block;
+  /* position: relative; */
+  /* display: block; */
   margin: 0 auto;
   text-align: center;
   background-color: transparent;
   border: none;
   border-bottom: solid #fa7268 1px;
-  font-size: 1.2em;
+  font-size: 1em;
   width: 15em;
   height: 3em;
 } 
- textarea {
-   position: relative;
-  font-family: 'Poppins', sans-serif;
-   display: inline-block;
-  font-size: 0.9em;
+ .contactForm textarea {
+   /* position: relative; */
+  /* font-family: 'Poppins', sans-serif; */
+   /* display: inline-block; */
   height: 5em;
   width: 18em;
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1em;
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #fa7268;
-  margin-left: 3.5em;
+  /* margin-left: 6em; */
 } 
 
-button {
+.contactForm button {
   border: none;
   margin-top: 1.5rem;
   width: 10rem;
@@ -88,7 +102,7 @@ button {
   color: floralwhite;
 }
 
-.footNote{
+.contactFootNote{
   text-align: center;
   margin-top: 5em;
 }
@@ -115,51 +129,47 @@ button {
     padding-top: 2em;
     text-align: center;
     margin-left: 0em;
-}
+  }
 
   .contact { 
     height: 35em;
     width: 33em;
     margin-top: -2em;
     box-sizing: border-box;
- }  
+  }
  
-.contactForm input {
-  position: relative;
-  display: inline-block;
-  margin: 0 auto;
-  text-align: center;
-  background-color: transparent;
-  border: none;
-  border-bottom: solid #fa7268 1px;
-  font-size: 1.2em;
-  width: 15em;
-  height: 5rem;
-} 
+  .contactForm input {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid #fa7268 1px;
+    font-size: 1.2em;
+    width: 15em;
+    height: 5rem;
+  }
 
- textarea {
-  position: relative;
-  display: inline-block;
-  font-family: 'Poppins', sans-serif;
-  padding-top: 2em;
-  height: 6em;
-  width: 20em;
-  text-align: center;
-  font-size: 1.0em;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #fa7268;
-} 
+  .contactForm textarea {
+    position: relative;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    padding-top: 2em;
+    height: 6em;
+    width: 20em;
+    text-align: center;
+    font-size: 1.0em;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #fa7268;
+  }
 
   .contactPicture {
     display: none;
     margin-top: 0em;
     height: 0em;
     flex-flow: wrap-reverse;
-  }
-
-  .footNote{
-    margin-top: 2.9em;
   }
 }
 
@@ -179,50 +189,46 @@ button {
     padding-top: 2em;
     text-align: center;
     margin-left: 0em;
-}
+  }
 
   .contact { 
     height: 35em;
     width: 33em;
     margin-top: -2em;
     box-sizing: border-box;
- }  
+  }
  
-.contactForm input {
-  position: relative;
-  display: inline-block;
-  margin: 0 auto;
-  text-align: center;
-  background-color: transparent;
-  border: none;
-  border-bottom: solid #fa7268 1px;
-  font-size: 1.2em;
-  width: 15em;
-  height: 5rem;
-} 
+  .contactForm input {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid #fa7268 1px;
+    font-size: 1.2em;
+    width: 15em;
+    height: 5rem;
+  } 
 
- textarea {
-  position: relative;
-  display: inline-block;
-  font-family: 'Poppins', sans-serif;
-  padding-top: 2em;
-  height: 6em;
-  width: 20em;
-  text-align: center;
-  font-size: 1.0em;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #fa7268;
-} 
+  .contactForm textarea {
+    position: relative;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    padding-top: 2em;
+    height: 6em;
+    width: 20em;
+    text-align: center;
+    font-size: 1.0em;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #fa7268;
+  } 
 
   .contactPicture {
     display: none;
     margin-top: 0em;
     height: 0em;
     flex-flow: wrap-reverse;
-  }
-
-  .footNote{
-    margin-top: 7.5em;
   }
 }

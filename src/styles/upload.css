@@ -41,3 +41,8 @@
     margin: 1.5em;
 }
 
+#description {
+    border: solid black 1px;
+    height: 2em;
+    width: 12em;
+}

@@ -6,14 +6,14 @@ import '../styles/contact.css';
 class Contact extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="contactPageContainer">
         <nav>
           <Navbar />
         </nav>
         
         <div className="contactContainer">
             <div className="contact">
-                <h1>CONTACT</h1>
+                <p className="contactHeading">CONTACT</p>
           
                 <div className="contactTitleLine">
                 </div>
@@ -39,7 +39,7 @@ class Contact extends Component {
 
         </div>
 
-        <footer>
+        <footer className="contactFootNote">
           <Footer />
         </footer>
 

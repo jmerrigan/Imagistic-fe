@@ -1,50 +1,55 @@
-body{
+.aboutPageContainer {
   font-family: 'Poppins', sans-serif;
   height: 100%;
   width: 100vw;
-  margin: 0 auto;
+  margin: 0;
+  overflow: hidden;
 }
 
 .aboutContainer {
-    display: flex;
-    flex-basis: calc(50% - 5px); 
-    flex-flow: wrap-reverse;
-    justify-content: space-around;
-    align-items: flex-start;
-    width: 100% !important;
-    padding-top: 2em;
+  display: flex;
+  flex-basis: calc(50% - 5px); 
+  flex-flow: wrap-reverse;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 100% !important;
+  margin-top: 2.05em;
+  margin-bottom: 0;
+  /* padding-top: 2em; */
 }
 .aboutPicture {
   margin-top: 0em;
   height: 30em;
   width: 30em;
-   background-image: url('https://www.imagistic.com.au/img/s/v-5/u885882931-o695099713-53.jpg');/*(https://images.pexels.com/photos/326900/pexels-photo-326900.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260); */
+  background-image: url('https://www.imagistic.com.au/img/s/v-5/u885882931-o695099713-53.jpg');/*(https://images.pexels.com/photos/326900/pexels-photo-326900.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260); */
   background-size:  cover;
   background-position: 100% 18%;
   box-sizing: border-box;
+  margin-bottom: 2.2em;
 }
 
- .aboutContainer .aboutAbout { 
-   margin-top: 5em;
-   height: 30em;
-   width: 30em;
+.aboutContainer .aboutAbout { 
+  margin-top: 5em;
+  height: 30em;
+  width: 30em;
   box-sizing: border-box;
   /* background-color: blue; */
 }
 
 .aboutTitle h1 {
   position: relative;
-  font-size: 1.3em;
+  font-size: 1.7em;
   font-weight: 500;
   text-align: left;
   margin-top: -2em;
-  margin-left: 1em;
+  margin-left: 0em;
   margin-bottom: -0.8em;
+  color: #36454F;
 }
 
 .aboutTitleLine {
   position: relative;
-  margin-left: 1em;
+  margin-left: 0em;
   margin-right: 0.9em;
   padding-top: 0em;
   margin-top: 0.9em;  
@@ -52,15 +57,21 @@ body{
 }
 
 .aboutStories {
-  margin-top: 1em;
+  /* margin-top: 1em; */
   font-size: 0.75em;
-  margin-left: 1em;
+  margin-left: 0em;
   margin-right: 1.5em;
-} 
+}
 
-.footNote{
+.aboutStories p, .aboutStories strong {
+  color: #36454F;
+  font-size: 1.4em;
+}
+
+.aboutFootNote{
+  margin-top: 0;
   text-align: center;
-  margin-top: -2em;
+  margin-top: 2.7em;
 }
 
 ::-webkit-scrollbar {
@@ -71,17 +82,14 @@ body{
 /* Portrait Settings */
 /* Portrait Settings */
 @media only screen and (max-width: 661px) {
-  .body{
-    height: 100vh;
-    width: 100vw;
-    margin: 0 auto;
-  }
-  .pageContainer{
+  .aboutPageContainer{
     width:100vw;
+    margin: 0;
   }
    
   .aboutContainer {
     margin-top: 0em;
+    margin-bottom: 8em; 
     padding-left: 0em;
     height: 30em;
     flex-flow: wrap-reverse;
@@ -89,7 +97,7 @@ body{
   }
 
   .aboutTitle {
-    margin-top: 16em;
+    margin-top: 6em;
     margin-left: 0em;
   }
 
@@ -97,6 +105,7 @@ body{
     margin-top: 0em;
     margin-bottom: -3em;
     height: 20em;
+    display: none;
   }
 
   .aboutStories {
@@ -106,11 +115,10 @@ body{
     margin-right: 1.5em;
   } 
 
-  .footNote{
+  .aboutFootNote{
     margin-top: 0em;
     height: 5em;
     text-align: center;
-    margin-left: 2em;
   }
 
   ::-webkit-scrollbar {

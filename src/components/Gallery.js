@@ -8,7 +8,7 @@ class Gallery extends Component {
     const { imgArr1, imgArr2 } = this.props
     if(imgArr1) {
     return (
-      <div className="App">
+      <div className="galleryPageContainer">
         <nav>
           <Navbar />
         </nav>

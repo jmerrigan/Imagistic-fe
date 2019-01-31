@@ -1,6 +1,8 @@
-body {
+.galleryPageContainer {
+  font-family: 'Poppins', sans-serif;
   height: 100%;
   width: 100vw;
+  margin: 0;
 }
 .container {
   display: flex;
@@ -21,62 +23,71 @@ body {
   overflow-wrap: break-word;
 }
  
-  .column {
-    margin: 0.08em;
-    margin-top: 0;
-    flex: 35%;
-    width: 80vw;
-    padding: 0px;
-  }
+.column {
+  margin: 0.08em;
+  margin-top: 0;
+  flex: 35%;
+  width: 80vw;
+  padding: 0px;
+}
   
-  .column img {
-    vertical-align: middle;
+.column img {
+  vertical-align: middle;
+  width: 100%;
+  margin: 0.1em;
+}
+
+@media screen and (max-width: 661px) {
+  .container {
+    display: flex;
+    width: 100vw;
+    flex-wrap: column;
+    margin-top: 0em;
+    margin-left: 0em;
+    margin-right: 0em;
+  } 
+
+  .column {
+    /* display: flex; */
     width: 100%;
-    margin: 0.1em;
+    flex: 100%;
+    flex-wrap: wrap;
+    width: 100vw;
+    margin-top: 0em;
+    margin-right: 0em;
+    padding-left: 0em;
+    justify-content: space-between;
+  }
+  .column img{
+    width: 100%;
   }
 
-  @media screen and (max-width: 661px) {
-    .container {
-      display: flex;
-      width: 100vw;
-      flex-wrap: column;
-      margin-top: 0em;
-      margin-left: 0em;
-      margin-right: 0em;
-    } 
-
-    .column {
-      display: flex;
-      width: 100%;
-      flex: 100%;
-      flex-wrap: wrap;
-      width: 100vw;
-      margin-top: 0em;
-      margin-right: 0em;
-      padding-left: 0em;
-      justify-content: space-between;
-    }
-    .column img{
-      width: 100%;
-    }  
+  .gallerySideBar {
+    display: none;
+    position: absolute;
+    left: 0;
+    height: 0;
+    text-align: left;
+    margin-left: 0em;
   }
-    /* .gallerySideBar{
-      position: -webkit-sticky;  
-      position: sticky;
-      top: 10px;
-      background-color: lightcoral;
-      flex-wrap: wrap;
-      width: 20em;
-      height: 30vh;
-    } */
+}
+  /* .gallerySideBar{
+    position: -webkit-sticky;  
+    position: sticky;
+    top: 10px;
+    background-color: lightcoral;
+    flex-wrap: wrap;
+    width: 20em;
+    height: 30vh;
+  } */
 
-    /* .gallerySideBar {
-      display: none;
-      position: absolute;
-      left: 0;
-      height: 0;
-      text-align: left;
-      margin-left: 0em;
-    } */
+  /* .gallerySideBar {
+    display: none;
+    position: absolute;
+    left: 0;
+    height: 0;
+    text-align: left;
+    margin-left: 0em;
+  } */
 
     

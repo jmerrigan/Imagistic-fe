@@ -7,13 +7,13 @@ class Navbar extends Component {
     return (
       <div className="navBar">
         <div className="logo">
-        IMAGISTIC
+          <Link to="/" className="imagisticLogo">IMAGISTIC</Link>
         </div>
-        
-          <Link to="/gallery" className="navBarLinks">GALLERY</Link>
-          <Link to="/about" className="navBarLinks">ABOUT</Link>
+        <div className="navLinkContainer">
           <Link to="/contact" className="navBarLinks">CONTACT</Link>
-        
+          <Link to="/about" className="navBarLinks">ABOUT</Link>
+          <Link to="/gallery" className="navBarLinks">GALLERY</Link>
+        </div> 
       </div>
     );
   }
