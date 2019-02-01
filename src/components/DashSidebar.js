@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class DashSidebar extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="DashSidebar">
         This is the DashSidebar Page.
       </div>
     );

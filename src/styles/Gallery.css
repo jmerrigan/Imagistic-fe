@@ -1,35 +1,103 @@
+.galleryPageContainer {
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  width: 100vw;
+  margin: 0;
+}
 .container {
-    margin: 0;
+  display: flex;
+  flex-wrap: column;
+  margin-top: 2em;
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+} 
+
+.gallerySideBar{
+  position: -webkit-sticky;  
+  position: sticky;
+  top: 10px;
+  margin: 0.1em;
+  background-color: teal;
+  width: 20vw;
+  height: 80vh;
+  overflow-wrap: break-word;
+}
+ 
+.column {
+  margin: 0.08em;
+  margin-top: 0;
+  flex: 35%;
+  width: 80vw;
+  padding: 0px;
+}
+  
+.column img {
+  vertical-align: middle;
+  width: 100%;
+  margin: 0.1em;
+}
+
+.gallerySideBar {
+  text-align: center;
+  color: #36454F;
+  font-size: 1.4em;
+}
+
+.filterHeading {
+  font-size: 1.4em;
+}
+
+@media screen and (max-width: 661px) {
+  .container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 0 4px;
-  }
+    width: 100vw;
+    flex-wrap: column;
+    margin-top: 0em;
+    margin-left: 0em;
+    margin-right: 0em;
+  } 
 
   .column {
-    margin: 0;
-    flex: 32%;
-    max-width: 32%;
-    padding: 0 4px;
+    /* display: flex; */
+    width: 100%;
+    flex: 100%;
+    flex-wrap: wrap;
+    width: 100vw;
+    margin-top: 0em;
+    margin-right: 0em;
+    padding-left: 0em;
+    justify-content: space-between;
   }
-  
-  .column img {
-    margin-left: 0;
-    margin-top: 8px;
-    vertical-align: middle;
+  .column img{
     width: 100%;
   }
 
-  @media screen and (max-width: 800px) {
-    .column {
-      flex: 50%;
-      max-width: 50%;
-    }
+  .gallerySideBar {
+    display: none;
+    position: absolute;
+    left: 0;
+    height: 0;
+    text-align: left;
+    margin-left: 0em;
   }
+}
+  /* .gallerySideBar{
+    position: -webkit-sticky;  
+    position: sticky;
+    top: 10px;
+    background-color: lightcoral;
+    flex-wrap: wrap;
+    width: 20em;
+    height: 30vh;
+  } */
 
-  @media screen and (max-width: 600px) {
-    .column {
-      flex: 100%;
-      max-width: 100%;
-    }
-  }
+  /* .gallerySideBar {
+    display: none;
+    position: absolute;
+    left: 0;
+    height: 0;
+    text-align: left;
+    margin-left: 0em;
+  } */
+
+    

@@ -1,121 +1,187 @@
-body{
+.aboutPageContainer {
   font-family: 'Poppins', sans-serif;
   height: 100%;
   width: 100vw;
-  margin: 0 auto;
+  margin: 0;
+  overflow: hidden;
 }
-.navBar{
-color: black;
-background-image: linear-gradient(#fa7268, #fafafa);
-height: 5em;
-}
-.logo {
-  margin-left: 2em;
-  padding-top: 1.0em;
-  font-size: 25px;
-  font-weight: 500;
-  letter-spacing: 0.5em;
-}
-.navBar a {
-  font-size: 18px;
-  font-weight: 550;
-  text-transform: uppercase;
-  text-decoration: none;
-  float: right;
-  margin: 0.7em;
-  margin-top: -2em;
-  -webkit-transition: background-color 2s ease-out;
-  -moz-transition: background-color 2s ease-out;
-  -o-transition: background-color 0.7s ease-out;
-  transition: background-color 2s ease-out;
-}
-
-.navBar a:hover {
-  background-color:orangered;
-}
-
-
-
-
-
-
 
 .aboutContainer {
-    display: flex;
-    flex-basis: calc(50% - 5px); 
-    /* flex-flow: wrap-reverse; */
-    justify-content: space-around;
-    align-items: flex-start;
-    width: 100% !important;
-    padding-top: 8em;
-  
+  display: flex;
+  flex-basis: calc(50% - 5px); 
+  flex-flow: wrap-reverse;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 100% !important;
+  margin-top: 2.05em;
+  margin-bottom: 0;
+  /* padding-top: 2em; */
 }
-.aboutContainer .aboutPicture {
-  height: 20em;
-  width: 33em;
-  background-image: url(https://images.pexels.com/photos/326900/pexels-photo-326900.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
-  background-size: cover;
-  background-position: 70% 50%;
+.aboutPicture {
+  margin-top: 0em;
+  height: 30em;
+  width: 30em;
+  background-image: url('https://www.imagistic.com.au/img/s/v-5/u885882931-o695099713-53.jpg');/*(https://images.pexels.com/photos/326900/pexels-photo-326900.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260); */
+  background-size:  cover;
+  background-position: 100% 18%;
   box-sizing: border-box;
+  margin-bottom: 2.2em;
 }
 
- .aboutContainer .aboutAbout { 
-   height: 20em;
-   width: 33em;
+.aboutContainer .aboutAbout { 
+  margin-top: 5em;
+  height: 30em;
+  width: 30em;
   box-sizing: border-box;
+  /* background-color: blue; */
 }
 
 .aboutTitle h1 {
-  font-size: 1.3em;
+  position: relative;
+  font-size: 1.7em;
   font-weight: 500;
   text-align: left;
   margin-top: -2em;
-  margin-left: 1em;
+  margin-left: 0em;
   margin-bottom: -0.8em;
+  color: #36454F;
 }
-
 
 .aboutTitleLine {
   position: relative;
-  margin-left: 1em;
+  margin-left: 0em;
   margin-right: 0.9em;
   padding-top: 0em;
   margin-top: 0.9em;  
   border-bottom: 2px solid #fa7268; 
 }
 
-p {
-  margin-top: 4em;
+.aboutStories {
+  /* margin-top: 1em; */
   font-size: 0.75em;
-  margin-left: 3em;
+  margin-left: 0em;
   margin-right: 1.5em;
-} 
-
-
-
-.aboutContainer { margin: 0px; }
-.aboutPicture { background-color: blue; }
-/* .aboutAbout { background-color:#fafafa; } */
-
-.footNote{
-  text-align: center;
-  margin-top: 15em;
 }
 
+.aboutStories p, .aboutStories strong {
+  color: #36454F;
+  font-size: 1.4em;
+}
 
+.aboutFootNote{
+  margin-top: 0;
+  text-align: center;
+  margin-top: 2.7em;
+  color: #36454F;
+}
+
+::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+/* Portrait Settings */
+/* Portrait Settings */
 @media only screen and (max-width: 661px) {
-  .body{
-    height: 100vh;
-    margin: 0 auto;
+  .aboutPageContainer{
+    width:100vw;
+    margin: 0;
   }
    
   .aboutContainer {
-    margin-top: -5em;
+    margin-top: 0em;
+    margin-bottom: 8em; 
+    padding-left: 0em;
+    height: 30em;
     flex-flow: wrap-reverse;
+    /* background-color: blue; */
   }
+
+  .aboutTitle {
+    margin-top: 6em;
+    margin-left: 0em;
+  }
+
+  .aboutPicture{
+    margin-top: 0em;
+    margin-bottom: -3em;
+    height: 20em;
+    display: none;
+  }
+
+  .aboutStories {
+    margin-top: 0em;
+    font-size: 0.75em;
+    margin-left: 1em;
+    margin-right: 1.5em;
+  } 
+
+  .aboutFootNote{
+    margin-top: 0em;
+    height: 5em;
+    text-align: center;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+  }
+}
+
+/* Landscape Settings */
+/* Landscape Settings */
+/* @media only screen and (max-height: 414px) {
+  .body{
+    height: 100%;
+    width: 100vw;
+    margin: 0 auto;
+  }
+
+  .aboutPicture{
+   display: none;
+    margin-top: -3.5em;
+    margin-bottom: 0em;
+  }
+
+  .pageContainer{
+    width:100vw;
+  }
+
+  .aboutContainer {
+    margin-top: 0em;
+    margin-left: 1em;
+    height: 10em;
+    flex-flow: wrap;
+  }
+
+  .aboutTitle h1{
+    margin-top: 0em;
+    margin-left: 0em;
+    margin-top: -3em;
+  }
+
+.aboutTitleLine {
+  position: relative;
+  margin-left: 0em;
+  margin-right: 0.9em;
+  padding-top: 0em;
+  margin-top: 0.9em;  
+  border-bottom: 2px solid #fa7268; 
+}
+
+.aboutStories {
+  margin-top: 1em;
+  font-size: 0.75em;
+  margin-left: 0.5em;
+  margin-right: 1.5em;
+} 
+
   .footNote{
     margin-top: 2.5em;
   }
 
-
-}
+  ::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    /* background: transparent;  optional: just make scrollbar invisible */
+  /* } */
+/* } */ 

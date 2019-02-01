@@ -1,32 +1,56 @@
 import React, { Component } from 'react';
+import '../styles/Navbar.css';
 import '../styles/about.css';
+import Navbar from './Navbar';
+import Footer from './Footer';
+
 
 class About extends Component {
   render() {
     return (
-  <div class="aboutContainer">
-    <div class="aboutPicture">
-      <div>
+      <div class="aboutPageContainer">
 
-      </div>
-    </div>
-  
-    <div class="aboutAbout">
-    <div className="aboutTitle">
-        <h1>ABOUT</h1>
-        <div className="aboutTitleLine">
-        </div>
-            <div className="aboutStories">
-              <p>Enim esse deserunt dolor quis eiusmod ex tempor excepteur. Et laborum tempor duis esse pariatur mollit sit fugiat consectetur. Cillum esse magna id reprehenderit veniam sint incididunt.<br/>
-                Tempor fugiat nulla incididunt duis velit elit esse. Culpa et nisi commodo aute anim est sunt id elit laboris pariatur. Adipisicing aute magna ipsum proident sit commodo cupidatat. Pariatur dolore non velit Lorem elit laboris consequat. Ex ad nostrud dolor reprehenderit magna veniam ex.<br/>
-                Amet pariatur cupidatat ea magna non excepteur. Occaecat ipsum exercitation sit et. Dolor commodo elit et excepteur. Qui mollit eu proident pariatur Lorem tempor occaecat. Ad sit occaecat ex deserunt veniam officia nisi amet tempor enim aliqua ea.
-              </p>
-            </div>
+        <nav>
+          <Navbar /> 
+        </nav>
+        <div class="aboutContainer">
         
-      </div>
-    </div>
+          <div class="aboutPicture">
+          </div>
+        
+          <div class="aboutAbout">
+          <div className="aboutTitle">
+              <h1>ABOUT</h1>
+              <div className="aboutTitleLine">
+              </div>
+                  <div className="aboutStories">
+                    <p>
 
-</div>
+My name is David and I am an amateur nature/wildlife and landscape photographer based in Berwick, Melbourne, Victoria. Please feel free to browse my website and the images in the Albums. Should you wish to commission, use or purchase an image then please contact me via the Contact Page.
+<br/>
+<br/>
+<br/>
+<strong>Please note that all images on this site are subject to copyright ©
+</strong>
+<br/>
+Thank you
+<br/>
+
+
+David Sumner LAPS
+
+                    </p>
+                  </div>
+              
+            </div>
+          </div>
+
+        </div>
+
+        <footer className="aboutFootNote">
+          <Footer />
+        </footer>
+      </div>
     )}
   }
 
