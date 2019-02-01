@@ -20,7 +20,7 @@ handleLogin = (e) => {
   axios.post(url, { username, password })
     .then(res => {
       this.setState({ error: null })
-      // this.props.history.push('/admin/upload')
+      this.props.history.push('/admin/upload')
     })
     .catch(err => this.setState({ error: "Invalid username/password, please try again" }))
 };
