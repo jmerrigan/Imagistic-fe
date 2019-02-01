@@ -63,7 +63,7 @@ class App extends Component {
   handleNewSelected = (e) => {
     // console.log(e)
     this.setState({ selectedAlbumOption: e }, () => {
-      const { selectedAlbumOption, selectedAlbumImages, fullImgArray } = this.state
+      const { selectedAlbumOption, fullImgArray } = this.state
       // console.log(selectedAlbumOption)
       const result = fullImgArray.filter(img => img.album == selectedAlbumOption)
         const imgCount = result.length
