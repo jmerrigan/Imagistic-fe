@@ -12,7 +12,7 @@ class Upload extends Component {
 
   componentDidMount() {
     console.log('Hello world')
-    const logInCheckUrl = 'http://localhost:5000/auth/userloggedin'
+    const logInCheckUrl = 'https://imagistic-be-h41qrqicq.now.sh/auth/userloggedin'
     axios.get(logInCheckUrl)
       .then(res => console.log(res))
       .catch(err => this.props.history.push('/admin/login'))
@@ -52,7 +52,7 @@ class Upload extends Component {
   submitForm = (e) => {
     e.preventDefault();
     const data = new FormData();
-    const url = 'http://localhost:5000/auth/photo/upload'
+    const url = 'https://imagistic-be-h41qrqicq.now.sh/auth/photo/upload'
     const { tagArray, title, description, selectedAlbumArray } = this.state
     console.log(e.target.myImage.files[0])
     data.append('file', e.target.myImage.files[0]);

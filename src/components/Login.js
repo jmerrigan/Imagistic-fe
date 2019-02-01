@@ -16,11 +16,11 @@ handleInput = (e) => {
 handleLogin = (e) => {
   e.preventDefault();
   const { username, password } = this.state;
-  const url = "http://localhost:5000/auth/login"
+  const url = "https://imagistic-be-4ojad5ix9.now.sh/auth/login"
   axios.post(url, { username, password })
     .then(res => {
       this.setState({ error: null })
-      this.props.history.push('/admin/upload')
+      // this.props.history.push('/admin/upload')
     })
     .catch(err => this.setState({ error: "Invalid username/password, please try again" }))
 };
