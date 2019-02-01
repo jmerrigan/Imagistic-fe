@@ -33,26 +33,26 @@ class App extends Component {
 
 
     // ],
-  imgArr1: null,
-  imgArr2: null,
-  fullImgArray: null
-}
+    imgArr1: null,
+    imgArr2: null,
+    fullImgArray: null
+  }
 
-componentDidMount() {
+  componentDidMount() {
     Axios.get('http://localhost:5000/photos')
       .then(resp => {
-        this.setState({ fullImgArray: resp.data })
-        const { fullImgArray } = this.state
-        const imgCount = fullImgArray.length
+        this.setState({ fullImgArray: resp.data, selectedAlbumImages: resp.data })
+        const { selectedAlbumImages } = this.state
+        const imgCount = selectedAlbumImages.length
         const imgArr1 =[]
         const imgArr2 =[]
         for (let i = 0; i < imgCount;) {
           if (i < imgCount) {
-            imgArr2.push(fullImgArray[i])
+            imgArr1.push(selectedAlbumImages[i])
             i++
           }
           if (i < imgCount) {
-            imgArr1.push(fullImgArray[i])
+            imgArr2.push(selectedAlbumImages[i])
             i++
           }
         }
@@ -60,19 +60,55 @@ componentDidMount() {
       })
   }
 
-
-
+  handleNewSelected = (e) => {
+    // console.log(e)
+    this.setState({ selectedAlbumOption: e }, () => {
+      const { selectedAlbumOption, selectedAlbumImages, fullImgArray } = this.state
+      // console.log(selectedAlbumOption)
+      const result = fullImgArray.filter(img => img.album == selectedAlbumOption)
+        const imgCount = result.length
+        const imgArr1 =[]
+        const imgArr2 =[]
+        for (let i = 0; i < imgCount;) {
+          if (i < imgCount) {
+            imgArr1.push(result[i])
+            i++
+          }
+          if (i < imgCount) {
+            imgArr2.push(result[i])
+            i++
+          }
+        }
+        this.setState({ imgArr1, imgArr2 })
+    })
+    
+    // }
+    // const imgCount = selectedFilterOption.length
+    // const imgArr1 =[]
+    // const imgArr2 =[]
+    // for (let i = 0; i < imgCount;) {
+    //   if (i < imgCount) {
+    //     imgArr2.push(selectedFilterOption[i])
+    //     i++
+    //   }
+    //   if (i < imgCount) {
+    //     imgArr1.push(selectedFilterOption[i])
+    //     i++
+    //   }
+    // }
+    // this.setState({ imgArr1, imgArr2 })
+  }
 
   render() {
     const { fullImgArray, imgArr1, imgArr2 } = this.state
-    console.log(fullImgArray)
+    // console.log(fullImgArray)
     return (
       <BrowserRouter>
         <div>
           <Route exact path="/" component={Home} />
           <Route 
           exact path="/gallery"
-          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} />}
+          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} selectedAlbumOption={this.handleNewSelected} />}
           />
           <Route exact path="/about" component={AboutMe} />
           <Route exact path="/contact" component={Contact} />
