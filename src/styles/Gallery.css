@@ -37,6 +37,16 @@
   margin: 0.1em;
 }
 
+.gallerySideBar {
+  text-align: center;
+  color: #36454F;
+  font-size: 1.4em;
+}
+
+.filterHeading {
+  font-size: 1.4em;
+}
+
 @media screen and (max-width: 661px) {
   .container {
     display: flex;
