@@ -6,6 +6,10 @@ class Gallery extends Component {
 
   state ={}
 
+  handleClick = (e) => {
+    this.props.selectedAlbumOption(e.target.id)
+  }
+
   render() {
     const { fullImgArray, imgArr1, imgArr2 } = this.props
     let albumsArray = []
@@ -15,10 +19,7 @@ class Gallery extends Component {
           albumsArray.push(img.album[i])
         }
       })
-      // console.log(everyAlbum)
-      // console.log(albumsArray)
       var uniqueAlbums = [...new Set(albumsArray)];
-      // console.log(unique)
     }
     if(imgArr1) {
     return (
@@ -33,8 +34,8 @@ class Gallery extends Component {
             <br/>
             <strong>Albums:</strong>
             <br/>
-            {uniqueAlbums.map((album, index) => {
-              return <p id={index}>{album}</p>
+            {uniqueAlbums.map(album => {
+              return <p id={album} onClick={this.handleClick}>{album}</p>
             })}
           </div>
 
