@@ -16,7 +16,7 @@ handleInput = (e) => {
 handleLogin = (e) => {
   e.preventDefault();
   const { username, password } = this.state;
-  const url = "https://imagistic-be-4ojad5ix9.now.sh/auth/login"
+  const url = "https://imagistic-be-og87itclv.now.sh/auth/login"
   axios.post(url, { username, password })
     .then(res => {
       this.setState({ error: null })
