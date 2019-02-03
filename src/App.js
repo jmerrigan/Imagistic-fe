@@ -105,7 +105,6 @@ class App extends Component {
           exact path="/gallery"
           render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} selectedAlbumOption={this.handleNewSelected} />}
           />
-
           <Route exact path="/about" component={AboutMe} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/admin/login" component={Login} />
@@ -114,6 +113,7 @@ class App extends Component {
         </div>
       </BrowserRouter>
     )
+
   }
 }
 

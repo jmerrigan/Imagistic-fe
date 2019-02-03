@@ -78,7 +78,6 @@ class Gallery extends Component {
                     //     <input type="radio" name="tag" id={tag}/>
                     //   </>
                     // )
-
                     
                     return (
                       <>
