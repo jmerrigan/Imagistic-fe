@@ -81,22 +81,6 @@ class App extends Component {
         }
         this.setState({ imgArr1, imgArr2 })
     })
-    
-    // }
-    // const imgCount = selectedFilterOption.length
-    // const imgArr1 =[]
-    // const imgArr2 =[]
-    // for (let i = 0; i < imgCount;) {
-    //   if (i < imgCount) {
-    //     imgArr2.push(selectedFilterOption[i])
-    //     i++
-    //   }
-    //   if (i < imgCount) {
-    //     imgArr1.push(selectedFilterOption[i])
-    //     i++
-    //   }
-    // }
-    // this.setState({ imgArr1, imgArr2 })
   }
 
   render() {
