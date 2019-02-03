@@ -69,7 +69,23 @@ class Gallery extends Component {
                   {/* maps through the tags to display when the album is clicked */}
                   <p id={album} onClick={this.handleClick}>{album}</p>
                   {selectedAlbum == album && uniqueTags.map(tag => {
-                    return <span id={tag}>{tag}</span>
+                    // return <span id={tag}>{tag}</span>
+
+
+                    // return (
+                    //   <>
+                    //     <label>{tag}</label>
+                    //     <input type="radio" name="tag" id={tag}/>
+                    //   </>
+                    // )
+
+                    
+                    return (
+                      <>
+                        <label>{tag}</label>
+                        <input type="checkbox" name="tags" id={tag}/>
+                      </>
+                    )
                   })
                   }
                 </>
