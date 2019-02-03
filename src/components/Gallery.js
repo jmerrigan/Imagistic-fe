@@ -59,7 +59,7 @@ class Gallery extends Component {
                 <>
                   <p id={album} onClick={this.handleClick}>{album}</p>
                   {this.state.selectedAlbum == album && uniqueTags.map(tag => {
-                    <span id={album}>{tag}</span>
+                    return <span id={tag}>{tag}</span>
                   })
                   }
                 </>
