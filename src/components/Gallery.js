@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 import '../styles/Gallery.css';
-// import { throws } from 'assert';
 
 class Gallery extends Component {
 
@@ -9,6 +8,8 @@ class Gallery extends Component {
     tagSelected: null
   }
 
+  // this function will update the prop.selectedAlbumOption value to a new value when clicked
+  // then passes the value back to App.js
   handleClick = (e) => {
     this.props.selectedAlbumOption(e.target.id)
     this.setState({ selectedAlbum: e.target.id })
@@ -16,14 +17,19 @@ class Gallery extends Component {
 
   render() {
     const { fullImgArray, imgArr1, imgArr2 } = this.props
+    const { selectedAlbum } = this.state
     let albumsArray = []
     let tagsArray = []
     if (imgArr1) {
+
+      // maps through the whole array of images to get all the albums
       fullImgArray.map(img => {
         for (let i = 0; i < img.album.length; i++) {
           albumsArray.push(img.album[i])
         }
       })
+
+      // maps through both image array 1 and image array 2 to get all the tags
       imgArr1.map(img => {
         for (let i = 0; i < img.tags.length; i++) {
           tagsArray.push(img.tags[i])
@@ -34,6 +40,8 @@ class Gallery extends Component {
           tagsArray.push(img.tags[i])
         }
       })
+
+      // filters through the arrays and returns the unique values inside
       var uniqueAlbums = [...new Set(albumsArray)];
       var uniqueTags = [...new Set(tagsArray)]
     }
@@ -57,8 +65,10 @@ class Gallery extends Component {
             {uniqueAlbums.map(album => {
               return (
                 <>
+                  {/* p elements contains a onclick function to update the props to the value of the clicked id */}
+                  {/* maps through the tags to display when the album is clicked */}
                   <p id={album} onClick={this.handleClick}>{album}</p>
-                  {this.state.selectedAlbum == album && uniqueTags.map(tag => {
+                  {selectedAlbum == album && uniqueTags.map(tag => {
                     return <span id={tag}>{tag}</span>
                   })
                   }
@@ -68,6 +78,7 @@ class Gallery extends Component {
           </div>
 
           {/* maps through both image arrays to to display all the pictures within */}
+          {/* each array is its own column */}
           <div className="column">
           {imgArr1.map((img, index) => {
             return (
@@ -82,6 +93,7 @@ class Gallery extends Component {
             )
           })}
           </div> 
+
         </div>
       </div>
     );
