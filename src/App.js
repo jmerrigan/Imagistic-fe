@@ -39,7 +39,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    Axios.get('http://localhost:5000/photos')
+    console.log(process.env.REACT_APP_BE_URL)
+    Axios.get(process.env.REACT_APP_BE_URL + "photos")
       .then(resp => {
         this.setState({ fullImgArray: resp.data, selectedAlbumImages: resp.data })
         const { selectedAlbumImages } = this.state
