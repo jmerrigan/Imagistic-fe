@@ -29,7 +29,6 @@ class Gallery extends Component {
 
   render() {
     const { fullImgArray, imgArr1, imgArr2, albumResult } = this.props
-    console.log(albumResult)
     const { selectedAlbum } = this.state
     let albumsArray = []
     let tagsArray = []

@@ -67,25 +67,33 @@ class App extends Component {
   handleAlbumSelection = (e) => {
     this.setState({ selectedAlbumOption: e }, () => {
       const { selectedAlbumOption, fullImgArray } = this.state
+      const albumList = []
 
       // filter through the full image array to get back pictures with the same matching value
-      const albumResult = fullImgArray.filter(img => img.album == selectedAlbumOption)
-        const imgCount = albumResult.length
-        const imgArr1 =[]
-        const imgArr2 =[]
+
+      fullImgArray.map(img => img.album.map(album => {
+        if (album.includes(selectedAlbumOption)) {
+          albumList.push(img)
+        }
+      }))
+
+      // const albumResult = fullImgArray.filter(img => img.album == selectedAlbumOption)
+      const imgCount = albumList.length
+      const imgArr1 =[]
+      const imgArr2 =[]
 
         // splits the array into 2 seprate arrays which we use to display our images in 2 columns
-        for (let i = 0; i < imgCount;) {
-          if (i < imgCount) {
-            imgArr1.push(albumResult[i])
-            i++
-          }
-          if (i < imgCount) {
-            imgArr2.push(albumResult[i])
-            i++
-          }
+      for (let i = 0; i < imgCount;) {
+        if (i < imgCount) {
+          imgArr1.push(albumList[i])
+          i++
         }
-        this.setState({ imgArr1, imgArr2, albumSelectedArray: albumResult })
+        if (i < imgCount) {
+          imgArr2.push(albumList[i])
+          i++
+        }
+      }
+      this.setState({ imgArr1, imgArr2, albumSelectedArray: albumList })
     })
   }
 
