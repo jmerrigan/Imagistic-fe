@@ -66,30 +66,40 @@ class App extends Component {
 
 
   // this function recieves a new value from Gallery.js when it is triggered
-  handleNewSelected = (e) => {
+  handleAlbumSelection = (e) => {
     this.setState({ selectedAlbumOption: e }, () => {
       const { selectedAlbumOption, fullImgArray } = this.state
 
       // filter through the full image array to get back pictures with the same matching value
-      const result = fullImgArray.filter(img => img.album == selectedAlbumOption)
-        const imgCount = result.length
+      const albumResult = fullImgArray.filter(img => img.album == selectedAlbumOption)
+        const imgCount = albumResult.length
         const imgArr1 =[]
         const imgArr2 =[]
 
         // splits the array into 2 seprate arrays which we use to display our images in 2 columns
         for (let i = 0; i < imgCount;) {
           if (i < imgCount) {
-            imgArr1.push(result[i])
+            imgArr1.push(albumResult[i])
             i++
           }
           if (i < imgCount) {
-            imgArr2.push(result[i])
+            imgArr2.push(albumResult[i])
             i++
           }
         }
-        this.setState({ imgArr1, imgArr2 })
+        this.setState({ imgArr1, imgArr2, albumResult })
     })
   }
+
+  handleTags = (e) => {
+    // console.log(e)
+    const recievedTagArray = e
+    // const { albumResult } = this.state
+    // const tagFilterArray = albumResult.filter(img => img.tag == recievedTagArray)
+    // console.log(tagFilterArray)
+  }
+
+
 
   render() {
     const { fullImgArray, imgArr1, imgArr2 } = this.state
@@ -103,7 +113,7 @@ class App extends Component {
           {/* passing props through to the gallery component */}
           <Route 
           exact path="/gallery"
-          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} selectedAlbumOption={this.handleNewSelected} />}
+          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} selectedAlbumOption={this.handleAlbumSelection} tagFilter={this.handleTags} />}
           />
           <Route exact path="/about" component={AboutMe} />
           <Route exact path="/contact" component={Contact} />

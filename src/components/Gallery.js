@@ -5,7 +5,8 @@ import '../styles/Gallery.css';
 class Gallery extends Component {
 
   state ={
-    tagSelected: null
+    tagSelected: null,
+    selectedTagsArray: []
   }
 
   // this function will update the prop.selectedAlbumOption value to a new value when clicked
@@ -13,6 +14,17 @@ class Gallery extends Component {
   handleClick = (e) => {
     this.props.selectedAlbumOption(e.target.id)
     this.setState({ selectedAlbum: e.target.id })
+  }
+
+  tagHandler = (e) => {
+    const { selectedTagsArray } = this.state
+    const result = selectedTagsArray.findIndex( tag => tag === e.target.id );
+    if (selectedTagsArray.find(tag => tag == e.target.id)) {
+      selectedTagsArray.splice(result, 1)
+    } else {
+      selectedTagsArray.push(e.target.id)
+    }
+    this.props.tagFilter(selectedTagsArray)
   }
 
   render() {
@@ -82,7 +94,7 @@ class Gallery extends Component {
                     return (
                       <>
                         <label>{tag}</label>
-                        <input type="checkbox" name="tags" id={tag}/>
+                        <input type="checkbox" name="tags" id={tag} onChange={this.tagHandler}/>
                       </>
                     )
                   })
