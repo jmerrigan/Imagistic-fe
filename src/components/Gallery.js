@@ -27,6 +27,33 @@ class Gallery extends Component {
     this.props.tagFilter(selectedTagsArray)
   }
 
+  
+
+  lightboxClick = (e) => {
+    const element = e.target
+    console.log(e.target)
+    const elementID = element.getAttribute('id')
+    const lightboxImg = document.getElementById('lightbox-image')
+    const lightbox = document.getElementById('lightbox-overlay')
+    const newImg = new Image();
+
+    if (element.hasAttribute('data-lightbox')) {
+      // console.log("Yes this has that attribute")
+      e.preventDefault();
+      newImg.onload = function() {
+        lightboxImg.src = this.src;
+      }
+      lightboxImg.src = "";
+      newImg.src = element.getAttribute('data-lightbox');
+      lightbox.classList.add('visible');
+    }
+
+    if (elementID == 'lightbox-image' || elementID == 'lightbox-overlay') {
+      e.preventDefault();
+      lightbox.classList.remove('visible');
+    }
+  }
+
   render() {
     const { fullImgArray, imgArr1, imgArr2, albumResult } = this.props
     const { selectedAlbum } = this.state
@@ -106,24 +133,28 @@ class Gallery extends Component {
           <div className="column">
           {imgArr1.map((img, index) => {
             return (
-              <img src={img.image} id={`1${index}`} alt=""/>
+              <img src={img.image} id={`1${index}`} onClick={ this.lightboxClick} data-lightbox={img.image} alt=""/>
             )
           })}
           </div>
           <div className="column">
           {imgArr2.map((img, index) => {
             return (
-              <img src={img.image} id={`2${index}`} alt=""/>
+              <img src={img.image} id={`2${index}`} onClick={ this.lightboxClick} data-lightbox={img.image} alt=""/>
             )
           })}
           </div> 
-
+          <div id="lightbox-overlay">
+            <img src="" alt="Lightbox-image" title="Click anywhere to close"
+            onClick={this.lightboxClick} id="lightbox-image"/> 
+          </div>
         </div>
       </div>
     );
     } else {
       return <h1>Loading...</h1>
     }
+   
   }
 }
 export default Gallery;
