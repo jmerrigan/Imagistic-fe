@@ -39,7 +39,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(process.env.REACT_APP_BE_URL)
     Axios.get(process.env.REACT_APP_BE_URL + "photos")
       .then(resp => {
         this.setState({ fullImgArray: resp.data, selectedAlbumImages: resp.data })
@@ -47,6 +46,8 @@ class App extends Component {
         const imgCount = selectedAlbumImages.length
         const imgArr1 =[]
         const imgArr2 =[]
+
+        // split the data into 2 arrays which will them be used to display our pictures in 2 columns on the gallery page
         for (let i = 0; i < imgCount;) {
           if (i < imgCount) {
             imgArr1.push(selectedAlbumImages[i])
@@ -61,55 +62,56 @@ class App extends Component {
       })
   }
 
-  handleNewSelected = (e) => {
-    // console.log(e)
+
+  // this function recieves a new value from Gallery.js when it is triggered
+  handleAlbumSelection = (e) => {
     this.setState({ selectedAlbumOption: e }, () => {
       const { selectedAlbumOption, fullImgArray } = this.state
-      // console.log(selectedAlbumOption)
-      const result = fullImgArray.filter(img => img.album == selectedAlbumOption)
-        const imgCount = result.length
+
+      // filter through the full image array to get back pictures with the same matching value
+      const albumResult = fullImgArray.filter(img => img.album == selectedAlbumOption)
+        const imgCount = albumResult.length
         const imgArr1 =[]
         const imgArr2 =[]
+
+        // splits the array into 2 seprate arrays which we use to display our images in 2 columns
         for (let i = 0; i < imgCount;) {
           if (i < imgCount) {
-            imgArr1.push(result[i])
+            imgArr1.push(albumResult[i])
             i++
           }
           if (i < imgCount) {
-            imgArr2.push(result[i])
+            imgArr2.push(albumResult[i])
             i++
           }
         }
-        this.setState({ imgArr1, imgArr2 })
+        this.setState({ imgArr1, imgArr2, albumResult })
     })
-    
-    // }
-    // const imgCount = selectedFilterOption.length
-    // const imgArr1 =[]
-    // const imgArr2 =[]
-    // for (let i = 0; i < imgCount;) {
-    //   if (i < imgCount) {
-    //     imgArr2.push(selectedFilterOption[i])
-    //     i++
-    //   }
-    //   if (i < imgCount) {
-    //     imgArr1.push(selectedFilterOption[i])
-    //     i++
-    //   }
-    // }
-    // this.setState({ imgArr1, imgArr2 })
   }
+
+  handleTags = (e) => {
+    // console.log(e)
+    const recievedTagArray = e
+    // const { albumResult } = this.state
+    // const tagFilterArray = albumResult.filter(img => img.tag == recievedTagArray)
+    // console.log(tagFilterArray)
+  }
+
+
 
   render() {
     const { fullImgArray, imgArr1, imgArr2 } = this.state
-    // console.log(fullImgArray)
     return (
+
+      // setting different routes to load different components using react-router-dom
       <BrowserRouter>
         <div>
           <Route exact path="/" component={Home} />
+
+          {/* passing props through to the gallery component */}
           <Route 
           exact path="/gallery"
-          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} selectedAlbumOption={this.handleNewSelected} />}
+          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} selectedAlbumOption={this.handleAlbumSelection} tagFilter={this.handleTags} />}
           />
           <Route exact path="/about" component={AboutMe} />
           <Route exact path="/contact" component={Contact} />
@@ -120,65 +122,6 @@ class App extends Component {
       </BrowserRouter>
     )
 
-    // const { imgArr1, imgArr2, imgArr3 } = this.state
-    // const { pathname } = window.location
-    // const params = pathname.substr(0)
-
-    // if (params === '/') {
-    //   return (
-    //     <>
-    //       <Home />
-    //     </>
-    //   )
-    // } 
-    // else if (params === '/gallery') {
-    //   return(
-    //     <div>
-    //       <Navbar />
-    //       <GallerySidebar />
-    //       <Gallery imgArr1={imgArr1} imgArr2={imgArr2} imgArr3={imgArr3}/>
-    //     </div>
-    //   )
-    // } 
-    // else if (params === '/about') {
-    //   return(
-    //     <div>
-    //       <Navbar />
-    //       <AboutMe />
-    //       <Footer />
-    //     </div>
-    //   )
-    // } 
-    // else if (params === '/contact') {
-    //   return(
-    //     <div>
-    //       <Navbar />
-    //       <Contact />
-    //       <Footer />
-    //   </div>
-    //   )
-    // }
-    // else if (params ==='/admin/login') {
-    //   return <Login />
-    // } 
-    // else if (params ==='/admin/upload') {
-    //   return(
-    //   <div>
-    //     <DashSidebar />
-    //     <Upload />
-    //   </div>
-    //   )
-    // } 
-    // else if (params === '/admin/manage') {
-    //   return(
-    //     <div>
-    //       <DashSidebar />
-    //       <ManageImages />
-    //     </div>
-    //   )
-    // } else {
-    //   return <h1>Error</h1>
-    // }
   }
 }
 
