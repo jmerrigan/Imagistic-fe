@@ -27,6 +27,10 @@ class Gallery extends Component {
     this.props.tagFilter(selectedTagsArray)
   }
 
+  disableMenu = (e) => {
+    e.preventDefault();
+  }
+
   
 
   lightboxClick = (e) => {
@@ -133,14 +137,14 @@ class Gallery extends Component {
           <div className="column">
           {imgArr1.map((img, index) => {
             return (
-              <img src={img.image} id={`1${index}`} onClick={ this.lightboxClick} data-lightbox={img.image} alt=""/>
+              <img src={img.image} id={`1${index}`} onClick={ this.lightboxClick} onContextMenu={this.disableMenu} data-lightbox={img.image} alt=""/>
             )
           })}
           </div>
           <div className="column">
           {imgArr2.map((img, index) => {
             return (
-              <img src={img.image} id={`2${index}`} onClick={ this.lightboxClick} data-lightbox={img.image} alt=""/>
+              <img src={img.image} id={`2${index}`} onClick={ this.lightboxClick} onContextMenu={this.disableMenu} data-lightbox={img.image} alt=""/>
             )
           })}
           </div> 
