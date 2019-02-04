@@ -30,12 +30,28 @@ class Gallery extends Component {
   
 
   lightboxClick = (e) => {
-    var element = e.target
+    const element = e.target
     console.log(e.target)
-        // elementID = element.getAttribute('id')
-        // lightboxImg = document.getElementById('lightbox-image')
-        // lightbox = document.getElementById('lightbox-overlay')
-        // newImg = new Image();
+    const elementID = element.getAttribute('id')
+    const lightboxImg = document.getElementById('lightbox-image')
+    const lightbox = document.getElementById('lightbox-overlay')
+    const newImg = new Image();
+
+    if (element.hasAttribute('data-lightbox')) {
+      // console.log("Yes this has that attribute")
+      e.preventDefault();
+      newImg.onload = function() {
+        lightboxImg.src = this.src;
+      }
+      lightboxImg.src = "";
+      newImg.src = element.getAttribute('data-lightbox');
+      lightbox.classList.add('visible');
+    }
+
+    if (elementID == 'lightbox-image' || elementID == 'lightbox-overlay') {
+      e.preventDefault();
+      lightbox.classList.remove('visible');
+    }
   }
 
   render() {
@@ -69,29 +85,6 @@ class Gallery extends Component {
       var uniqueTags = [...new Set(tagsArray)]
     }
 
-<<<<<<< HEAD
-    // if (element.hasAttribute('data-lightbox')) {
-    //   event.preventDefault();
-    //   newImg.onload = function() {
-    //     lightboxImg.src = this.src;
-    //   }
-
-    //   lightboxImg.src = '';
-    //   newImg.src = element.getAttribute('data-lightbox');
-    //   lightbox.classList.add('visible');
-
-    //   return(
-    //     <div id="lightbox-overlay">
-    //       <img src="" id="lightbox-image"/>
-    //     </div>
-    //   )
-  // }
-
-    // if (elementID == 'lightbox-image' || elementID == 'lightbox-overlay') {
-    //   lightbox.classList.remove('visible');
-    // }
-=======
->>>>>>> 24f0e4bd6331f263cc0d857b91ca25ecbc61b8d9
 
     if(imgArr1) {
     return (
@@ -154,7 +147,10 @@ class Gallery extends Component {
             )
           })}
           </div> 
-
+          <div id="lightbox-overlay">
+            <img src="" alt="Lightbox-image" title="Click anywhere to close"
+            onClick={this.lightboxClick} id="lightbox-image"/> 
+          </div>
         </div>
       </div>
     );
