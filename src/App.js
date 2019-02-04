@@ -128,7 +128,7 @@ class App extends Component {
 
 
   render() {
-    const { fullImgArray, imgArr1, imgArr2, albumResult } = this.state
+    const { fullImgArray, imgArr1, imgArr2, albumSelectedArray } = this.state
     return (
 
       // setting different routes to load different components using react-router-dom
@@ -139,7 +139,7 @@ class App extends Component {
           {/* passing props through to the gallery component */}
           <Route 
           exact path="/gallery"
-          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} selectedAlbumOption={this.handleAlbumSelection} tagFilter={this.handleTags} albumResult={albumResult} />}
+          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} selectedAlbumOption={this.handleAlbumSelection} tagFilter={this.handleTags} albumResult={albumSelectedArray} />}
           />
           <Route exact path="/about" component={AboutMe} />
           <Route exact path="/contact" component={Contact} />
