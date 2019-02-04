@@ -85,22 +85,48 @@ class App extends Component {
             i++
           }
         }
-        this.setState({ imgArr1, imgArr2, albumResult })
+        this.setState({ imgArr1, imgArr2, albumSelectedArray: albumResult })
     })
   }
 
   handleTags = (e) => {
-    // console.log(e)
-    const recievedTagArray = e
-    // const { albumResult } = this.state
-    // const tagFilterArray = albumResult.filter(img => img.tag == recievedTagArray)
-    // console.log(tagFilterArray)
+    const tagResults = []
+    const { albumSelectedArray } = this.state
+    const imgTagArr1 = []
+    const imgTagArr2 = []
+    
+    e.map(tags => {
+      albumSelectedArray.map(album => {
+        if (album.tags.includes(tags)) {
+          tagResults.push(album)
+        }
+      })
+      }
+    )
+    const uniqueTags = [...new Set(tagResults)]
+    
+    
+
+    const imgCount = uniqueTags.length
+    for (let i = 0; i < imgCount;) {
+      if (i < imgCount) {
+        imgTagArr1.push(uniqueTags[i])
+        i++
+      }
+      if (i < imgCount) {
+        imgTagArr2.push(uniqueTags[i])
+        i++
+      }
+    }
+
+
+    this.setState({ imgArr1: imgTagArr1, imgArr2: imgTagArr2 })
   }
 
 
 
   render() {
-    const { fullImgArray, imgArr1, imgArr2 } = this.state
+    const { fullImgArray, imgArr1, imgArr2, albumSelectedArray } = this.state
     return (
 
       // setting different routes to load different components using react-router-dom
@@ -111,7 +137,7 @@ class App extends Component {
           {/* passing props through to the gallery component */}
           <Route 
           exact path="/gallery"
-          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} selectedAlbumOption={this.handleAlbumSelection} tagFilter={this.handleTags} />}
+          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} selectedAlbumOption={this.handleAlbumSelection} tagFilter={this.handleTags} albumResult={albumSelectedArray} />}
           />
           <Route exact path="/about" component={AboutMe} />
           <Route exact path="/contact" component={Contact} />

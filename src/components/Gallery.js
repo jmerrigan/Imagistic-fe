@@ -28,7 +28,8 @@ class Gallery extends Component {
   }
 
   render() {
-    const { fullImgArray, imgArr1, imgArr2 } = this.props
+    const { fullImgArray, imgArr1, imgArr2, albumResult } = this.props
+    console.log(albumResult)
     const { selectedAlbum } = this.state
     let albumsArray = []
     let tagsArray = []
@@ -41,17 +42,14 @@ class Gallery extends Component {
         }
       })
 
-      // maps through both image array 1 and image array 2 to get all the tags
-      imgArr1.map(img => {
-        for (let i = 0; i < img.tags.length; i++) {
-          tagsArray.push(img.tags[i])
-        }
-      })
-      imgArr2.map(img => {
-        for (let i = 0; i < img.tags.length; i++) {
-          tagsArray.push(img.tags[i])
-        }
-      })
+      // maps through albumResult to get all the tags
+      if (albumResult) {
+        albumResult.map(img => {
+          for (let i = 0; i < img.tags.length; i++) {
+            tagsArray.push(img.tags[i])
+          }
+        })
+      }
 
       // filters through the arrays and returns the unique values inside
       var uniqueAlbums = [...new Set(albumsArray)];
