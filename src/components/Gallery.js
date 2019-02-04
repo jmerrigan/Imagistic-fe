@@ -10,6 +10,17 @@ class Gallery extends Component {
     this.props.selectedAlbumOption(e.target.id)
   }
 
+  
+
+  lightboxClick = (e) => {
+    var element = e.target
+    console.log(e.target)
+        // elementID = element.getAttribute('id')
+        // lightboxImg = document.getElementById('lightbox-image')
+        // lightbox = document.getElementById('lightbox-overlay')
+        // newImg = new Image();
+  }
+
   render() {
     const { fullImgArray, imgArr1, imgArr2 } = this.props
     let albumsArray = []
@@ -21,6 +32,28 @@ class Gallery extends Component {
       })
       var uniqueAlbums = [...new Set(albumsArray)];
     }
+
+    // if (element.hasAttribute('data-lightbox')) {
+    //   event.preventDefault();
+    //   newImg.onload = function() {
+    //     lightboxImg.src = this.src;
+    //   }
+
+    //   lightboxImg.src = '';
+    //   newImg.src = element.getAttribute('data-lightbox');
+    //   lightbox.classList.add('visible');
+
+    //   return(
+    //     <div id="lightbox-overlay">
+    //       <img src="" id="lightbox-image"/>
+    //     </div>
+    //   )
+  // }
+
+    // if (elementID == 'lightbox-image' || elementID == 'lightbox-overlay') {
+    //   lightbox.classList.remove('visible');
+    // }
+
     if(imgArr1) {
     return (
       <div className="galleryPageContainer">
@@ -42,14 +75,14 @@ class Gallery extends Component {
           <div className="column">
           {imgArr1.map((img, index) => {
             return (
-              <img src={img.image} id={`1${index}`} alt=""/>
+              <img src={img.image} id={`1${index}`} onClick={ this.lightboxClick} data-lightbox={img.image} alt=""/>
             )
           })}
           </div>
           <div className="column">
           {imgArr2.map((img, index) => {
             return (
-              <img src={img.image} id={`2${index}`} alt=""/>
+              <img src={img.image} id={`2${index}`} onClick={ this.lightboxClick} data-lightbox={img.image} alt=""/>
             )
           })}
           </div> 
@@ -59,6 +92,7 @@ class Gallery extends Component {
     } else {
       return <h1>Loading...</h1>
     }
+   
   }
 }
 export default Gallery;
