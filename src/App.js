@@ -33,8 +33,7 @@ class App extends Component {
 
 
     // ],
-    imgArr1: null,
-    imgArr2: null,
+    imgArray: null,
     fullImgArray: null
   }
 
@@ -44,21 +43,16 @@ class App extends Component {
         this.setState({ fullImgArray: resp.data, selectedAlbumImages: resp.data })
         const { selectedAlbumImages } = this.state
         const imgCount = selectedAlbumImages.length
-        const imgArr1 =[]
-        const imgArr2 =[]
+        const imgArray =[]
 
         // split the data into 2 arrays which will them be used to display our pictures in 2 columns on the gallery page
         for (let i = 0; i < imgCount;) {
           if (i < imgCount) {
-            imgArr1.push(selectedAlbumImages[i])
-            i++
-          }
-          if (i < imgCount) {
-            imgArr2.push(selectedAlbumImages[i])
+            imgArray.push(selectedAlbumImages[i])
             i++
           }
         }
-        this.setState({ imgArr1, imgArr2 })
+        this.setState({ imgArray })
       })
   }
 
@@ -79,62 +73,60 @@ class App extends Component {
 
       // const albumResult = fullImgArray.filter(img => img.album == selectedAlbumOption)
       const imgCount = albumList.length
-      const imgArr1 =[]
-      const imgArr2 =[]
+      const imgArray =[]
 
         // splits the array into 2 seprate arrays which we use to display our images in 2 columns
       for (let i = 0; i < imgCount;) {
         if (i < imgCount) {
-          imgArr1.push(albumList[i])
-          i++
-        }
-        if (i < imgCount) {
-          imgArr2.push(albumList[i])
+          imgArray.push(albumList[i])
           i++
         }
       }
-      this.setState({ imgArr1, imgArr2, albumSelectedArray: albumList })
+      this.setState({ imgArray, albumSelectedArray: albumList })
     })
   }
 
   handleTags = (e) => {
     const tagResults = []
     const { albumSelectedArray } = this.state
-    const imgTagArr1 = []
-    const imgTagArr2 = []
-    
-    e.map(tags => {
-      albumSelectedArray.map(album => {
-        if (album.tags.includes(tags)) {
-          tagResults.push(album)
+    const imgTagArray = []
+
+    if (e[0] === undefined) {
+      const imgCount = albumSelectedArray.length
+      const imgArray = []
+      for (let i = 0; i < imgCount; i++) {
+        imgArray.push(albumSelectedArray[i])
+      }
+      this.setState({ imgArray })
+    } else {
+      e.map(tags => {
+        albumSelectedArray.map(album => {
+          if (album.tags.includes(tags)) {
+            tagResults.push(album)
+          }
+        })
         }
-      })
+      )
+      const uniqueTags = [...new Set(tagResults)]
+      
+      
+  
+      const imgCount = uniqueTags.length
+      for (let i = 0; i < imgCount;) {
+        if (i < imgCount) {
+          imgTagArray.push(uniqueTags[i])
+          i++
+        }
       }
-    )
-    const uniqueTags = [...new Set(tagResults)]
-    
-    
-
-    const imgCount = uniqueTags.length
-    for (let i = 0; i < imgCount;) {
-      if (i < imgCount) {
-        imgTagArr1.push(uniqueTags[i])
-        i++
-      }
-      if (i < imgCount) {
-        imgTagArr2.push(uniqueTags[i])
-        i++
-      }
+  
+      this.setState({ imgArray: imgTagArray })
     }
-
-
-    this.setState({ imgArr1: imgTagArr1, imgArr2: imgTagArr2 })
   }
 
 
 
   render() {
-    const { fullImgArray, imgArr1, imgArr2, albumSelectedArray } = this.state
+    const { fullImgArray, imgArray, albumSelectedArray } = this.state
     return (
 
       // setting different routes to load different components using react-router-dom
@@ -145,7 +137,7 @@ class App extends Component {
           {/* passing props through to the gallery component */}
           <Route 
           exact path="/gallery"
-          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArr1={imgArr1} imgArr2={imgArr2} selectedAlbumOption={this.handleAlbumSelection} tagFilter={this.handleTags} albumResult={albumSelectedArray} />}
+          render={props => <Gallery {...props} fullImgArray={fullImgArray} imgArray={imgArray} selectedAlbumOption={this.handleAlbumSelection} tagFilter={this.handleTags} albumResult={albumSelectedArray} />}
           />
           <Route exact path="/about" component={AboutMe} />
           <Route exact path="/contact" component={Contact} />
