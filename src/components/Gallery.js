@@ -35,14 +35,12 @@ class Gallery extends Component {
 
   lightboxClick = (e) => {
     const element = e.target
-    console.log(e.target)
     const elementID = element.getAttribute('id')
     const lightboxImg = document.getElementById('lightbox-image')
     const lightbox = document.getElementById('lightbox-overlay')
     const newImg = new Image();
 
     if (element.hasAttribute('data-lightbox')) {
-      // console.log("Yes this has that attribute")
       e.preventDefault();
       newImg.onload = function() {
         lightboxImg.src = this.src;
@@ -59,11 +57,11 @@ class Gallery extends Component {
   }
 
   render() {
-    const { fullImgArray, imgArr1, imgArr2, albumResult } = this.props
+    const { fullImgArray, imgArray, albumResult } = this.props
     const { selectedAlbum } = this.state
     let albumsArray = []
     let tagsArray = []
-    if (imgArr1) {
+    if (imgArray) {
 
       // maps through the whole array of images to get all the albums
       fullImgArray.map(img => {
@@ -87,7 +85,7 @@ class Gallery extends Component {
     }
 
 
-    if(imgArr1) {
+    if(imgArray) {
     return (
       <div className="galleryPageContainer">
         <nav>
@@ -107,22 +105,12 @@ class Gallery extends Component {
                 <>
                   {/* p elements contains a onclick function to update the props to the value of the clicked id */}
                   {/* maps through the tags to display when the album is clicked */}
-                  <p id={album} onClick={this.handleClick}>{album}</p>
-                  {selectedAlbum == album && uniqueTags.map(tag => {
-                    // return <span id={tag}>{tag}</span>
-
-
-                    // return (
-                    //   <>
-                    //     <label>{tag}</label>
-                    //     <input type="radio" name="tag" id={tag}/>
-                    //   </>
-                    // )
-                    
+                  <p id={album} onClick={this.handleClick} key={album}>{album}</p>
+                  {selectedAlbum == album && uniqueTags.map((tag, index) => {             
                     return (
                       <>
                         <label>{tag}</label>
-                        <input type="checkbox" name="tags" id={tag} onChange={this.tagHandler}/>
+                        <input type="checkbox" name="tags" id={tag} onChange={this.tagHandler} key={index}/>
                       </>
                     )
                   })
@@ -135,19 +123,12 @@ class Gallery extends Component {
           {/* maps through both image arrays to to display all the pictures within */}
           {/* each array is its own column */}
           <div className="column">
-          {imgArr1.map((img, index) => {
+          {imgArray.map((img, index) => {
             return (
-              <img src={img.image} id={`1${index}`} onClick={ this.lightboxClick} onContextMenu={this.disableMenu} data-lightbox={img.image} alt=""/>
+              <img src={img.image} id={index} onClick={ this.lightboxClick} data-lightbox={img.image} onContextMenu={this.disableMenu} alt="" key={index}/>
             )
           })}
           </div>
-          <div className="column">
-          {imgArr2.map((img, index) => {
-            return (
-              <img src={img.image} id={`2${index}`} onClick={ this.lightboxClick} onContextMenu={this.disableMenu} data-lightbox={img.image} alt=""/>
-            )
-          })}
-          </div> 
           <div id="lightbox-overlay">
             <img src="" alt="Lightbox-image" title="Click anywhere to close"
             onClick={this.lightboxClick} id="lightbox-image"/> 
