@@ -16,7 +16,7 @@ handleInput = (e) => {
 handleLogin = (e) => {
   e.preventDefault();
   const { username, password } = this.state;
-  const url = "http://localhost:5000/auth/login"
+  const url = process.env.REACT_APP_BE_URL + "auth/login"
   axios.post(url, { username, password })
     .then(res => {
       this.setState({ error: null })
