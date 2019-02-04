@@ -39,9 +39,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-
-    // when component mounts, it will go and grab data from the route using Axios
-    Axios.get('http://localhost:5000/photos')
+    Axios.get(process.env.REACT_APP_BE_URL + "photos")
       .then(resp => {
         this.setState({ fullImgArray: resp.data, selectedAlbumImages: resp.data })
         const { selectedAlbumImages } = this.state
