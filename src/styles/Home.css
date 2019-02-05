@@ -9,7 +9,7 @@ margin: 0;
     font-family: 'Poppins', sans-serif;
     background-repeat: none;
     background-size: cover;
-    background-position: 60% 100%;
+    /* background-position: 60% 100%; */
     /* this will allow the object of the pictures centered */
 
 }
