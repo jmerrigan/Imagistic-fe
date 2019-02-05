@@ -92,9 +92,9 @@ class Upload extends Component {
   }
 
   render() {
-    const { tagArray, albumArray, selectedAlbumArray } = this.state
+    const { tagArray, selectedAlbumArray } = this.state
 
-    const { fullImgArray, imgArray, albumResult } = this.props
+    const { fullImgArray } = this.props
     let albumsArray = []
     if (fullImgArray) {
 
