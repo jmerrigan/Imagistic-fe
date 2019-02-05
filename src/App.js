@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import Axios from 'axios';
-
 import './App.css';
 import AboutMe from './components/About';
 import Contact from './components/Contact';
@@ -10,6 +9,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 import ManageImages from './components/ManageImages'
 import Upload from './components/Upload'
+
+Axios.defaults.withCredentials = true;
 
 
 
@@ -160,10 +161,13 @@ class App extends Component {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/admin/login" component={Login} />
           <Route 
+          exact path="/admin/manage"
+          render={props => <ManageImages {...props} fullImgArray={fullImgArray} imgArray={imgArray} selectedAlbumOption={this.handleAlbumSelection} tagFilter={this.handleTags} albumResult={albumSelectedArray} />}
+          />
+          <Route 
           exact path="/admin/upload" 
           render={props => <Upload {...props} fullImgArray={fullImgArray} />}
           />
-          <Route exact path="/admin/manage" component={ManageImages} />
         </div>
       </BrowserRouter>
     )

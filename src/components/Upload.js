@@ -3,6 +3,8 @@ import '../styles/upload.css';
 import DashSidebar from './DashSidebar';
 import AdminHeader from './AdminHeader';
 import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 
 class Upload extends Component {
   state = {
