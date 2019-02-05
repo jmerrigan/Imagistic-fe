@@ -63,26 +63,43 @@ class App extends Component {
       const { selectedAlbumOption, fullImgArray } = this.state
       const albumList = []
 
-      // filter through the full image array to get back pictures with the same matching value
+      if (e !== null) {
 
-      fullImgArray.map(img => img.album.map(album => {
-        if (album.includes(selectedAlbumOption)) {
-          albumList.push(img)
+        // filter through the full image array to get back pictures with the same matching value
+  
+        fullImgArray.map(img => img.album.map(album => {
+          if (album.includes(selectedAlbumOption)) {
+            albumList.push(img)
+          }
+        }))
+  
+        // const albumResult = fullImgArray.filter(img => img.album == selectedAlbumOption)
+        const imgCount = albumList.length
+        const imgArray =[]
+  
+          // splits the array into 2 seprate arrays which we use to display our images in 2 columns
+        for (let i = 0; i < imgCount;) {
+          if (i < imgCount) {
+            imgArray.push(albumList[i])
+            i++
+          }
         }
-      }))
+        this.setState({ imgArray, albumSelectedArray: albumList })
 
-      // const albumResult = fullImgArray.filter(img => img.album == selectedAlbumOption)
-      const imgCount = albumList.length
-      const imgArray =[]
+      } else {
+        const { selectedAlbumImages } = this.state
+        const imgCount = selectedAlbumImages.length
+        const imgArray =[]
 
-        // splits the array into 2 seprate arrays which we use to display our images in 2 columns
-      for (let i = 0; i < imgCount;) {
-        if (i < imgCount) {
-          imgArray.push(albumList[i])
-          i++
+        for (let i = 0; i < imgCount;) {
+          if (i < imgCount) {
+            imgArray.push(selectedAlbumImages[i])
+            i++
+          }
         }
+        this.setState({ imgArray })
       }
-      this.setState({ imgArray, albumSelectedArray: albumList })
+
     })
   }
 
