@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import Axios from 'axios';
-
 import './App.css';
 import AboutMe from './components/About';
 import Contact from './components/Contact';
@@ -10,6 +9,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 import ManageImages from './components/ManageImages'
 import Upload from './components/Upload'
+
+Axios.defaults.withCredentials = true;
 
 
 
@@ -63,26 +64,43 @@ class App extends Component {
       const { selectedAlbumOption, fullImgArray } = this.state
       const albumList = []
 
-      // filter through the full image array to get back pictures with the same matching value
+      if (e !== null) {
 
-      fullImgArray.map(img => img.album.map(album => {
-        if (album.includes(selectedAlbumOption)) {
-          albumList.push(img)
+        // filter through the full image array to get back pictures with the same matching value
+  
+        fullImgArray.map(img => img.album.map(album => {
+          if (album.includes(selectedAlbumOption)) {
+            albumList.push(img)
+          }
+        }))
+  
+        // const albumResult = fullImgArray.filter(img => img.album == selectedAlbumOption)
+        const imgCount = albumList.length
+        const imgArray =[]
+  
+          // splits the array into 2 seprate arrays which we use to display our images in 2 columns
+        for (let i = 0; i < imgCount;) {
+          if (i < imgCount) {
+            imgArray.push(albumList[i])
+            i++
+          }
         }
-      }))
+        this.setState({ imgArray, albumSelectedArray: albumList })
 
-      // const albumResult = fullImgArray.filter(img => img.album == selectedAlbumOption)
-      const imgCount = albumList.length
-      const imgArray =[]
+      } else {
+        const { selectedAlbumImages } = this.state
+        const imgCount = selectedAlbumImages.length
+        const imgArray =[]
 
-        // splits the array into 2 seprate arrays which we use to display our images in 2 columns
-      for (let i = 0; i < imgCount;) {
-        if (i < imgCount) {
-          imgArray.push(albumList[i])
-          i++
+        for (let i = 0; i < imgCount;) {
+          if (i < imgCount) {
+            imgArray.push(selectedAlbumImages[i])
+            i++
+          }
         }
+        this.setState({ imgArray })
       }
-      this.setState({ imgArray, albumSelectedArray: albumList })
+
     })
   }
 
@@ -142,8 +160,14 @@ class App extends Component {
           <Route exact path="/about" component={AboutMe} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/admin/login" component={Login} />
-          <Route exact path="/admin/upload" component={Upload} />
-          <Route exact path="/admin/manage" component={ManageImages} />
+          <Route 
+          exact path="/admin/manage"
+          render={props => <ManageImages {...props} fullImgArray={fullImgArray} imgArray={imgArray} selectedAlbumOption={this.handleAlbumSelection} tagFilter={this.handleTags} albumResult={albumSelectedArray} />}
+          />
+          <Route 
+          exact path="/admin/upload" 
+          render={props => <Upload {...props} fullImgArray={fullImgArray} />}
+          />
         </div>
       </BrowserRouter>
     )
