@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import '../styles/upload.css';
-import DashSidebar from './DashSidebar';
-import AdminHeader from './AdminHeader';
 import axios from 'axios';
+import AdminHeader from './AdminHeader';
+import '../styles/upload.css';
 
 class Upload extends Component {
   state = {
@@ -85,13 +84,12 @@ class Upload extends Component {
     return (
       <div className="formContainer">
           <AdminHeader/>
-          <DashSidebar/>
-        
+          <div className="adminLogoLine"></div>
         <form onSubmit={this.submitForm} className="uploadForm" encType="multipart/form-data">
 
           {/* FILE UPLOAD */}
           <label className="uploadFormLabels">Select Image to Upload</label>
-          <br/>
+          
           <input type="file" name="myImage" id="myImage" accept="image/*" className="uploadFormInputs"/>
           <br/>
 
