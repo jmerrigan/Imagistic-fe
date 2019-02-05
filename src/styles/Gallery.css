@@ -1,7 +1,6 @@
 .galleryPageContainer {
   font-family: 'Poppins', sans-serif;
   height: 100%;
-  /* width: 60vw; */
   margin: 0;
 }
 .container {
@@ -18,36 +17,34 @@
   top: 10px;
   margin: 0.1em;
   background-color: teal;
-  width: 20vw;
+  min-width: 20vw;
+  max-width: 20vw;
   height: 80vh;
-  overflow-wrap: break-word;
+  overflow: scroll;
 }
 
 .column { 
   display: flex; 
-  flex-direction: column; 
   flex-flow: row wrap;
-  margin-left: 5px;
-  margin-right: 5px;
-  /* flex-wrap: wrap; */
-/*   height: 100vw; */
-  /* max-height: auto;
-  width: auto; */
-  font-size: 0;  
-  /* align-content: space-evenly; */
-  justify-content: space-evenly;
-  /* margin-right: 0.2em;
-  margin-left: 0.2em; */
+  padding: 0;
+  margin: 0;
+  width: auto;
+  justify-content: flex-start;
+
 }
 .column img {  
-  height: 180px;
-  margin: 1px;
-
-
+  width: 350px;
+  max-height: 350px;
+  height: auto;
+  margin-top: 0;
+  margin-bottom: 1em;
+  margin-left: 0.6em;
+  margin-right: 0.6em; 
+  object-fit: cover;
   transition: .8s opacity;
 } 
 
-.column:hover img { opacity: 0.3; }
+.column:hover img { opacity: 0.6; }
 .column:hover img:hover { opacity: 1; } 
 
 
@@ -82,10 +79,13 @@
 #lightbox-overlay.visible img{
   margin-top: 7vh;
   padding: 2em;
-  max-width: 80%;
   max-height:80%;
   width: auto;
   height: auto;
+}
+
+#loading {
+  text-align: center;
 }
 
 
@@ -102,67 +102,22 @@
     display: flex; 
     flex-direction: column; 
     flex-flow: row wrap;
-    /* flex-wrap: wrap; */
-    /* height: 100vw; */
-    /* max-height: auto;
-    width: auto; */
-    font-size: 0;  
+
     align-content: space-evenly;
     /* justify-content: space-between; */
   }
   .column img {  
-    height: 180px;
-    margin: 1px;
+    width: 180px;
+    max-height: 180px;
+    height: auto;
   
   
     transition: .8s opacity;
   } 
-  
-  .column:hover img { opacity: 0.3; }
-  .column:hover img:hover { opacity: 1; } 
-  
-  
-  /* .column {
-    display: flex;
-    width: 100%;
-    flex: 100%;
-    flex-wrap: wrap;
-    width: 100vw;
-    margin-top: 0em;
-    margin-right: 0em;
-    padding-left: 0em;
-    justify-content: space-between;
-  }
-  .column img{
-    width: 100%;
-  } */
 
   .gallerySideBar {
     display: none;
-    position: absolute;
-    left: 0;
-    height: 0;
-    text-align: left;
-    margin-left: 0em;
   }
 }
-  /* .gallerySideBar{
-    position: -webkit-sticky;  
-    position: sticky;
-    top: 10px;
-    background-color: lightcoral;
-    flex-wrap: wrap;
-    width: 20em;
-    height: 30vh;
-  } */
-
-  /* .gallerySideBar {
-    display: none;
-    position: absolute;
-    left: 0;
-    height: 0;
-    text-align: left;
-    margin-left: 0em;
-  } */
 
     
