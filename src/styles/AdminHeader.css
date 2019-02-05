@@ -1,0 +1,60 @@
+#adminLogo {
+    text-align: center;
+    margin: auto;
+    color: #36454F;
+    font-size: 3.5em;
+    letter-spacing: 0.4em;
+    font-weight: 700;
+    text-decoration: none;
+    padding-bottom: 0.3em;;
+    border-bottom: 2px solid #fa7268;
+    width: 60%;
+}
+
+.adminLinkContainer{
+    margin: 1.5em;
+    padding-left: 1em;
+}
+
+.adminLinks {
+    font-size: 1.2em;
+    text-decoration: none;
+    padding: 0.5em;
+    color: #36454F;
+    -webkit-transition: background-color 2s ease-out;
+    -moz-transition: background-color 2s ease-out;
+    -o-transition: background-color 2s ease-out;
+    transition: background-color 2s ease-out;
+}
+
+.adminLinkContainer .adminLinks:hover {
+    background-color:#fa7268;
+    color: white;
+} 
+
+.logoutContainer {
+    float: right;
+    font-size: 1.1em;
+    text-decoration: none;
+    padding-right: 1em;
+  
+}
+
+.logout {
+    text-decoration: none;
+    color: #36454F;
+    padding: 0.575em;
+    -webkit-transition: background-color 2s ease-out;
+    -moz-transition: background-color 2s ease-out;
+    -o-transition: background-color 2s ease-out;
+    transition: background-color 2s ease-out;
+}
+
+.adminLinkContainer .logout:hover {
+    background-color:#fa7268;
+    color: white;
+} 
+
+
+
+
