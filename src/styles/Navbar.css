@@ -1,32 +1,15 @@
-/* .navBar {
-    display: flex;
-    justify-content: space-between;
-    color: black;
-    /* background-image: linear-gradient(#fa7268, #fafafa); */
-    /* height: 5em; */
-/*} */
 
 .logo {
     margin-top: 2.3em;
-    /* margin-left: 4.5em; */
-    /* padding-top: 0em; */
-    /* font-size: 2em; */
-    /* font-weight: 700; */
-    /* letter-spacing: 0.5em; */
 }
 
-/* 
-.nav_links {
-    margin-right: 5%;
-    margin-top: 6.5%;
-}
 
 .nav_links a {
     margin-right: 2em;
     font-size: 1.5em;
     text-decoration: none;
     color: black;
-} */
+} 
 
 /* start of Navbar */
 
@@ -45,14 +28,11 @@
   -moz-transition: background-color 2s ease-out;
   -o-transition: background-color 2s ease-out;
   transition: background-color 2s ease-out;
-  /* -webkit-transition: color 2s ease-out;
-  -moz-transition: color 2s ease-out;
-  -o-transition: color 2s ease-out;
-  transition: color 2s ease-out; */
+  
 }
 
 .navBar .navBarLinks:hover {
-  background-color:orangered;
+  background-color:#fa7268;
   color: white;
 } 
 

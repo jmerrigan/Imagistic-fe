@@ -4,24 +4,108 @@ import '../styles/Gallery.css';
 
 class Gallery extends Component {
 
-  state ={}
+  state ={
+    tagSelected: null,
+    selectedTagsArray: [],
+    currentAlbumSelected: null,
+    albumToggle: false
+  }
 
-  handleClick = (e) => {
-    this.props.selectedAlbumOption(e.target.id)
+  // this function will update the prop.selectedAlbumOption value to a new value when clicked
+  // then passes the value back to App.js
+  albumHandler = (e) => {
+    const { currentAlbumSelected, albumToggle } = this.state
+    // this.props.selectedAlbumOption(e.target.id)
+    if (albumToggle === false && currentAlbumSelected === e.target.id) {
+      this.setState({ albumToggle: true, currentAlbumSelected: e.target.id })
+      this.props.selectedAlbumOption(e.target.id)
+    }
+    if (albumToggle === true && currentAlbumSelected === e.target.id) {
+      this.setState({ albumToggle: false, currentAlbumSelected: null })
+      this.props.selectedAlbumOption(null)
+    }
+    if (albumToggle === true && currentAlbumSelected !== e.target.id){
+      this.setState({ currentAlbumSelected: e.target.id })
+      this.props.selectedAlbumOption(e.target.id)
+    }
+    if (albumToggle === false && currentAlbumSelected !== e.target.id) {
+      this.setState({ albumToggle: true, currentAlbumSelected: e.target.id })
+      this.props.selectedAlbumOption(e.target.id)
+    }
+  }
+
+
+  tagHandler = (e) => {
+    const { selectedTagsArray } = this.state
+    const result = selectedTagsArray.findIndex( tag => tag === e.target.id );
+    if (selectedTagsArray.find(tag => tag == e.target.id)) {
+      selectedTagsArray.splice(result, 1)
+    } else {
+      selectedTagsArray.push(e.target.id)
+    }
+    this.props.tagFilter(selectedTagsArray)
+    console.log(selectedTagsArray)
+  }
+
+  disableMenu = (e) => {
+    e.preventDefault();
+  }
+
+  
+
+  lightboxClick = (e) => {
+    const element = e.target
+    const elementID = element.getAttribute('id')
+    const lightboxImg = document.getElementById('lightbox-image')
+    const lightbox = document.getElementById('lightbox-overlay')
+    const newImg = new Image();
+
+    if (element.hasAttribute('data-lightbox')) {
+      e.preventDefault();
+      newImg.onload = function() {
+        lightboxImg.src = this.src;
+      }
+      lightboxImg.src = "";
+      newImg.src = element.getAttribute('data-lightbox');
+      lightbox.classList.add('visible');
+    }
+
+    if (elementID == 'lightbox-image' || elementID == 'lightbox-overlay') {
+      e.preventDefault();
+      lightbox.classList.remove('visible');
+    }
   }
 
   render() {
-    const { fullImgArray, imgArr1, imgArr2 } = this.props
+    const { fullImgArray, imgArray, albumResult } = this.props
+    const { currentAlbumSelected } = this.state
     let albumsArray = []
-    if (fullImgArray) {
+    let tagsArray = []
+    if (imgArray) {
+
+      // maps through the whole array of images to get all the albums
       fullImgArray.map(img => {
         for (let i = 0; i < img.album.length; i++) {
           albumsArray.push(img.album[i])
         }
       })
+
+      // maps through albumResult to get all the tags
+      if (albumResult) {
+        albumResult.map(img => {
+          for (let i = 0; i < img.tags.length; i++) {
+            tagsArray.push(img.tags[i])
+          }
+        })
+      }
+
+      // filters through the arrays and returns the unique values inside
       var uniqueAlbums = [...new Set(albumsArray)];
+      var uniqueTags = [...new Set(tagsArray)]
     }
-    if(imgArr1) {
+
+
+    if(imgArray) {
     return (
       <div className="galleryPageContainer">
         <nav>
@@ -29,36 +113,50 @@ class Gallery extends Component {
         </nav>
         <div className="container">
           <div className="gallerySideBar">
-            <strong className="filterHeading">Filtering Options</strong>
-            <br/>
-            <br/>
-            <strong>Albums:</strong>
-            <br/>
+
+            {/* maps through all the different album names and prints them out */}
             {uniqueAlbums.map(album => {
-              return <p id={album} onClick={this.handleClick}>{album}</p>
+              return (
+                <>
+                  {/* p elements contains a onclick function to update the props to the value of the clicked id */}
+                  {/* maps through the tags to display when the album is clicked */}
+                  <p id={album} onClick={this.albumHandler} key={album} className="albumFilter">{album}</p>
+                  {currentAlbumSelected == album && uniqueTags.map((tag, index) => {             
+                    return (
+                      <div className="tagContainer">
+                        <div className="tagFilter">
+                          <label>{tag}</label>
+                          <input type="checkbox" name="tags" id={tag} onChange={this.tagHandler} key={index}/>
+                        </div>
+                      </div>
+                    )
+                  })
+                  }
+                </>
+              )
             })}
           </div>
 
+          {/* maps through both image arrays to to display all the pictures within */}
+          {/* each array is its own column */}
           <div className="column">
-          {imgArr1.map((img, index) => {
+          {imgArray.map((img, index) => {
             return (
-              <img src={img.image} id={`1${index}`} alt=""/>
+              <img src={img.image} id={index} onClick={ this.lightboxClick} data-lightbox={img.image} onContextMenu={this.disableMenu} alt="" key={index}/>
             )
           })}
           </div>
-          <div className="column">
-          {imgArr2.map((img, index) => {
-            return (
-              <img src={img.image} id={`2${index}`} alt=""/>
-            )
-          })}
-          </div> 
+          <div id="lightbox-overlay">
+            <img src="" alt="Lightbox-image" title="Click anywhere to close"
+            onClick={this.lightboxClick} id="lightbox-image"/> 
+          </div>
         </div>
       </div>
     );
     } else {
-      return <h1>Loading...</h1>
+      return <h1 id="loading">Loading...</h1>
     }
+   
   }
 }
 export default Gallery;
