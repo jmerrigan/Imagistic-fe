@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Gallery from './Gallery';
+import AdminHeader from './AdminHeader';
+
 
 axios.defaults.withCredentials = true;
 
@@ -77,8 +78,8 @@ class ManageImages extends Component {
     console.log(url)
     axios.delete(url)
       .then(res => window.location.reload())
-      .catch(err => console.log(err));
-  }
+      .catch(err => console.log(err))
+  };
 
   editImage = img => e => {
     console.log(img)
@@ -140,7 +141,9 @@ class ManageImages extends Component {
 
     if(imgArray) {
     return (
+    
       <div className="galleryPageContainer">
+        <AdminHeader />
         <div className="container">
           <div className="gallerySideBar">
 
