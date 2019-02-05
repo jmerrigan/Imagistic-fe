@@ -16,11 +16,36 @@
   position: sticky;
   top: 10px;
   margin: 0.1em;
-  background-color: teal;
+  /* background-color: teal; */
   min-width: 20vw;
   max-width: 20vw;
-  height: 80vh;
+  height: 100vh;
   overflow: scroll;
+}
+
+.albumFilter {
+  border: solid 1px #36454F;
+  margin: 0;
+  font-size: 1.15em;
+}
+
+.albumFilter:hover {
+  cursor: pointer;
+}
+
+.tagContainer {
+  display: inline-flex;
+  margin: 0;
+  flex-flow: wrap;
+}
+
+.tagFilter {
+  margin: 0;
+  margin-right: 0.3em;
+}
+
+.tagFilter label {
+  font-size: 0.85em;
 }
 
 .column { 
@@ -37,9 +62,8 @@
   max-height: 350px;
   height: auto;
   margin-top: 0;
-  margin-bottom: 1em;
-  margin-left: 0.6em;
-  margin-right: 0.6em; 
+  margin-bottom: 0.5em;
+  margin-left: 1.3em;
   object-fit: cover;
   transition: .8s opacity;
 } 
