@@ -143,7 +143,7 @@ class ManageImages extends Component {
     return (
     
       <div className="galleryPageContainer">
-        <AdminHeader />
+        <AdminHeader history={this.props.history} />
         <div className="container">
           <div className="gallerySideBar">
 
