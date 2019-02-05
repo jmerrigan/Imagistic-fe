@@ -32,29 +32,8 @@ class Gallery extends Component {
       this.setState({ albumToggle: true, currentAlbumSelected: e.target.id })
       this.props.selectedAlbumOption(e.target.id)
     }
-    // this.setState({ currentAlbumSelected: e.target.id })
   }
 
-  // albumHandler = (e) => {
-  //   const { currentAlbumSelected, albumToggle } = this.state
-  //   const currentAlbumVariable = e.target.id
-  //   if (currentAlbumVariable) {
-  //     this.props.selectedAlbumOption(currentAlbumSelected)
-  //     if (albumToggle === true && currentAlbumSelected !== currentAlbumVariable) {
-  //       this.setState({ currentAlbumSelected: currentAlbumVariable })
-  //     }
-  //     if (albumToggle === false && currentAlbumSelected !== currentAlbumVariable) {
-  //       this.setState({ albumToggle: true, currentAlbumSelected: currentAlbumVariable })
-  //     }
-  //     if (albumToggle === true && currentAlbumSelected === currentAlbumVariable) {
-  //       this.setState({ albumToggle: false, currentAlbumSelected: currentAlbumVariable })
-  //     }
-  //     if (albumToggle === false && currentAlbumSelected === currentAlbumVariable) {
-  //       this.setState({ albumToggle: true, currentAlbumSelected: currentAlbumVariable })
-  //     }
-  //     this.props.selectedAlbumOption(currentAlbumVariable)
-  //   }
-  // }
 
   tagHandler = (e) => {
     const { selectedTagsArray } = this.state
