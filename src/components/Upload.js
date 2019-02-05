@@ -111,7 +111,7 @@ class Upload extends Component {
 
     return (
       <div className="formContainer">
-          <AdminHeader/>
+          <AdminHeader history={this.props.history} />
           <div className="adminLogoLine"></div>
         <form onSubmit={this.submitForm} className="uploadForm" encType="multipart/form-data">
 
