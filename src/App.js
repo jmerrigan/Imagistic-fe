@@ -159,7 +159,10 @@ class App extends Component {
           <Route exact path="/about" component={AboutMe} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/admin/login" component={Login} />
-          <Route exact path="/admin/upload" component={Upload} />
+          <Route 
+          exact path="/admin/upload" 
+          render={props => <Upload {...props} fullImgArray={fullImgArray} />}
+          />
           <Route exact path="/admin/manage" component={ManageImages} />
         </div>
       </BrowserRouter>
