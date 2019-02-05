@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import Gallery from './Gallery';
+
+axios.defaults.withCredentials = true;
+
 
 
 class ManageImages extends Component {
+
+  state = {}
+
   render() {
     return (
-      <div className="App">
-        This is the Manage Images Page.
-      </div>
-    );
+      <h1>Manage images apge</h1>
+    )
   }
 }
 
