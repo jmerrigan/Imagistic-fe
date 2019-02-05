@@ -11,10 +11,9 @@ class Upload extends Component {
   };
 
   componentDidMount() {
-    console.log('Hello world')
     const logInCheckUrl = process.env.REACT_APP_BE_URL + "auth/userloggedin"
     axios.get(logInCheckUrl)
-      .then(res => console.log(res))
+      // .then(res => res.send("Hi"))
       .catch(err => this.props.history.push('/admin/login'))
   }
 
@@ -27,9 +26,17 @@ class Upload extends Component {
       })
       this.setState({ album: '' })
     }
-    // console.log(this.state.tag)
-    // console.log(this.state.tagArray)
   };
+
+  addExisitingAlbum = (e) => {
+    e.preventDefault()
+    const { albumList } = this.state
+    if (albumList) {
+      this.setState({ 
+        selectedAlbumArray: [ ...this.state.selectedAlbumArray, albumList]
+       })
+    }
+  }
 
   addTag = (e) => {
     e.preventDefault()
@@ -40,13 +47,16 @@ class Upload extends Component {
       })
       this.setState({ tag: '' })
     }
-    // console.log(this.state.tag)
-    // console.log(this.state.tagArray)
   };
 
   handleInput = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value });
+  }
+
+  handleSelection = (e) => {
+    const albumList = e.target.value
+    this.setState({ albumList })
   }
 
   submitForm = (e) => {
@@ -82,6 +92,22 @@ class Upload extends Component {
 
   render() {
     const { tagArray, albumArray, selectedAlbumArray } = this.state
+
+    const { fullImgArray, imgArray, albumResult } = this.props
+    let albumsArray = []
+    if (fullImgArray) {
+
+      // maps through the whole array of images to get all the albums
+      fullImgArray.map(img => {
+        for (let i = 0; i < img.album.length; i++) {
+          albumsArray.push(img.album[i])
+        }
+      })
+
+      // filters through the arrays and returns the unique values inside
+      var uniqueAlbums = [...new Set(albumsArray)];
+    }
+
     return (
       <div className="formContainer">
           <AdminHeader/>
@@ -119,16 +145,17 @@ class Upload extends Component {
           <label className="uploadFormLabels">Create New Album</label>
           <br/>
           <input type="text" name="album" id="album" onChange={this.handleInput} value={this.state.album}/>
-          <button onClick={this.addAlbum} id="tagSubmit">+</button>
+          <button onClick={this.addAlbum} id="albumSubmit">+</button>
           <br/>
           <label className="uploadFormLabels">Select From Existing Albums</label>
           <br/>
-          <select name="albumList" id="albumList">
-            {albumArray && albumArray.map(album => {
-              return <option value={album.name}>{album.name}</option>
+          <select name="albumList" id="albumList" onChange={this.handleSelection}>
+            <option disabled selected value> -- select an option -- </option>
+            {uniqueAlbums && uniqueAlbums.map(album => {
+              return <option>{album}</option>
             })}
           </select>
-          <button onClick={this.addAlbum} id="tagSubmit">+</button>
+          <button onClick={this.addExisitingAlbum} id="albumSubmit">+</button>
           <br/>
 
 
