@@ -6,15 +6,55 @@ class Gallery extends Component {
 
   state ={
     tagSelected: null,
-    selectedTagsArray: []
+    selectedTagsArray: [],
+    currentAlbumSelected: null,
+    albumToggle: false
   }
 
   // this function will update the prop.selectedAlbumOption value to a new value when clicked
   // then passes the value back to App.js
-  handleClick = (e) => {
-    this.props.selectedAlbumOption(e.target.id)
-    this.setState({ selectedAlbum: e.target.id })
+  albumHandler = (e) => {
+    const { currentAlbumSelected, albumToggle } = this.state
+    // this.props.selectedAlbumOption(e.target.id)
+    if (albumToggle === false && currentAlbumSelected === e.target.id) {
+      this.setState({ albumToggle: true, currentAlbumSelected: e.target.id })
+      this.props.selectedAlbumOption(e.target.id)
+    }
+    if (albumToggle === true && currentAlbumSelected === e.target.id) {
+      this.setState({ albumToggle: false, currentAlbumSelected: null })
+      this.props.selectedAlbumOption(null)
+    }
+    if (albumToggle === true && currentAlbumSelected !== e.target.id){
+      this.setState({ currentAlbumSelected: e.target.id })
+      this.props.selectedAlbumOption(e.target.id)
+    }
+    if (albumToggle === false && currentAlbumSelected !== e.target.id) {
+      this.setState({ albumToggle: true, currentAlbumSelected: e.target.id })
+      this.props.selectedAlbumOption(e.target.id)
+    }
+    // this.setState({ currentAlbumSelected: e.target.id })
   }
+
+  // albumHandler = (e) => {
+  //   const { currentAlbumSelected, albumToggle } = this.state
+  //   const currentAlbumVariable = e.target.id
+  //   if (currentAlbumVariable) {
+  //     this.props.selectedAlbumOption(currentAlbumSelected)
+  //     if (albumToggle === true && currentAlbumSelected !== currentAlbumVariable) {
+  //       this.setState({ currentAlbumSelected: currentAlbumVariable })
+  //     }
+  //     if (albumToggle === false && currentAlbumSelected !== currentAlbumVariable) {
+  //       this.setState({ albumToggle: true, currentAlbumSelected: currentAlbumVariable })
+  //     }
+  //     if (albumToggle === true && currentAlbumSelected === currentAlbumVariable) {
+  //       this.setState({ albumToggle: false, currentAlbumSelected: currentAlbumVariable })
+  //     }
+  //     if (albumToggle === false && currentAlbumSelected === currentAlbumVariable) {
+  //       this.setState({ albumToggle: true, currentAlbumSelected: currentAlbumVariable })
+  //     }
+  //     this.props.selectedAlbumOption(currentAlbumVariable)
+  //   }
+  // }
 
   tagHandler = (e) => {
     const { selectedTagsArray } = this.state
@@ -25,6 +65,7 @@ class Gallery extends Component {
       selectedTagsArray.push(e.target.id)
     }
     this.props.tagFilter(selectedTagsArray)
+    console.log(selectedTagsArray)
   }
 
   disableMenu = (e) => {
@@ -58,7 +99,7 @@ class Gallery extends Component {
 
   render() {
     const { fullImgArray, imgArray, albumResult } = this.props
-    const { selectedAlbum } = this.state
+    const { currentAlbumSelected } = this.state
     let albumsArray = []
     let tagsArray = []
     if (imgArray) {
@@ -93,11 +134,6 @@ class Gallery extends Component {
         </nav>
         <div className="container">
           <div className="gallerySideBar">
-            <strong className="filterHeading">Filtering Options</strong>
-            <br/>
-            <br/>
-            <strong>Albums:</strong>
-            <br/>
 
             {/* maps through all the different album names and prints them out */}
             {uniqueAlbums.map(album => {
@@ -105,13 +141,15 @@ class Gallery extends Component {
                 <>
                   {/* p elements contains a onclick function to update the props to the value of the clicked id */}
                   {/* maps through the tags to display when the album is clicked */}
-                  <p id={album} onClick={this.handleClick} key={album}>{album}</p>
-                  {selectedAlbum == album && uniqueTags.map((tag, index) => {             
+                  <p id={album} onClick={this.albumHandler} key={album} className="albumFilter">{album}</p>
+                  {currentAlbumSelected == album && uniqueTags.map((tag, index) => {             
                     return (
-                      <>
-                        <label>{tag}</label>
-                        <input type="checkbox" name="tags" id={tag} onChange={this.tagHandler} key={index}/>
-                      </>
+                      <div className="tagContainer">
+                        <div className="tagFilter">
+                          <label>{tag}</label>
+                          <input type="checkbox" name="tags" id={tag} onChange={this.tagHandler} key={index}/>
+                        </div>
+                      </div>
                     )
                   })
                   }
