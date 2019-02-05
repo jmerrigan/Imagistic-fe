@@ -137,7 +137,7 @@ class Gallery extends Component {
       </div>
     );
     } else {
-      return <h1>Loading...</h1>
+      return <h1 id="loading">Loading...</h1>
     }
    
   }

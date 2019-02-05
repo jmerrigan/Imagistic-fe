@@ -59,7 +59,7 @@ LightBox Image Gallery using CSS and Javascript to show off pictures.
 		</title>
 <meta name="description" content="Dave Sumner, Professional Photographer, Berwick, Melbourne - Victoria. Specialised in wildlife, nature and landscape">
 <link rel="canonical" href="https://www.imagistic.com.au">
-<meta name="robots" content="noindex,noimageindex">
+<meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dave Sumner | Imagistic Photography">
 <meta property="og:url" content="https://www.imagistic.com.au">
