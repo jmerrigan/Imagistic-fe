@@ -79,14 +79,14 @@ class Upload extends Component {
 
   deleteAlbumRecord = (e) => {
     const { selectedAlbumArray } = this.state
-    const albumIndex = e.target.id
+    const albumIndex = e.currentTarget.id
     selectedAlbumArray.splice(albumIndex, 1)
     this.setState({ selectedAlbumArray })
   }
 
   deleteTagRecord = (e) => {
     const { tagArray } = this.state
-    const tagIndex = e.target.id
+    const tagIndex = e.currentTarget.id
     tagArray.splice(tagIndex, 1)
     this.setState({ tagArray })
   }
@@ -136,8 +136,8 @@ class Upload extends Component {
             <div id="assignedAlbums">
             {selectedAlbumArray && selectedAlbumArray.map((album, index) => {
               return (
-                <div className="albumCard" onClick={this.deleteAlbumRecord}>
-                  <p className="albumPara" id={index}>{album}</p>
+                <div className="albumCard" onClick={this.deleteAlbumRecord} id={index}>
+                  <p className="albumPara">{album}</p>
                   <p className="delete">Delete</p>
                 </div>
                 )
@@ -169,8 +169,8 @@ class Upload extends Component {
           <div id="assignedTags">
           {tagArray && tagArray.map((tag, index) => {
             return (
-              <div className="tagCard" onClick={this.deleteTagRecord}>
-                <p className="tagPara" id={index}>{tag}</p>
+              <div className="tagCard" onClick={this.deleteTagRecord} id={index}>
+                <p className="tagPara">{tag}</p>
                 <p className="delete">Delete</p>
               </div>
             )
