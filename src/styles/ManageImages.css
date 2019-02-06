@@ -1,0 +1,178 @@
+.galleryPageContainer {
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    margin: 0;
+}
+.container {
+    display: flex;
+    flex-wrap: column;
+    margin-top: 2em;
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+} 
+  
+.gallerySideBar{
+    position: -webkit-sticky;  
+    position: sticky;
+    top: 10px;
+    margin: 0.1em;
+    /* background-color: teal; */
+    min-width: 20vw;
+    max-width: 20vw;
+    height: 100vh;
+    overflow: scroll;
+}
+  
+.albumFilter {
+    border-bottom: solid 1px #fa7268;
+    margin: 0;
+    font-size: 1.15em;
+}
+  
+.albumFilter:hover {
+    cursor: pointer;
+}
+  
+.tagContainer {
+    display: inline-flex;
+    margin: 0;
+    flex-flow: wrap;
+}
+  
+.tagFilter {
+    margin: 0;
+    margin-right: 0.3em;
+}
+  
+.tagFilter label {
+    font-size: 0.85em;
+}
+  
+.column { 
+    display: flex; 
+    flex-flow: row wrap;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    justify-content: flex-start;
+  
+}
+
+.column img {  
+    width: 350px;
+    max-height: 350px;
+    height: auto;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    margin-left: 1.3em;
+    object-fit: cover;
+    transition: .8s opacity;
+} 
+  
+.column:hover img { opacity: 0.6; }
+.column:hover img:hover { opacity: 1; } 
+  
+  
+.gallerySideBar {
+    text-align: center;
+    color: #36454F;
+    font-size: 1.4em;
+}
+  
+.filterHeading {
+    font-size: 1.4em;
+}
+  
+  
+#loading {
+    text-align: center;
+}
+  
+.managePhoto img {
+    display: block;
+}
+  
+.managePhoto span {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+  
+.managePhoto button {
+    margin: 1em;
+}
+  
+#editFormContainer {
+    display: none;
+}
+  
+#editFormContainer.visible {
+    /* visibility: visible; */
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+}
+  
+#editFormContainer.visible form {
+    text-align: center;
+    color: white;
+    background: #36454F;
+    padding: 1em;
+    font-size: 1.5em;
+    height: 400px; 
+    width: 300px;
+    margin-top: 10vh;
+  
+}
+  
+#editFormContainer.visible input, button {
+    width: 100px;
+}
+  
+#editFormContainer.visible #description {
+    height: 50px;
+    width: 150px;
+    border: none;
+}
+  
+  
+@media screen and (max-width: 661px) {
+    .container {
+      display: flex;
+      width: 100vw;
+      flex-wrap: column;
+      margin-top: 0em;
+      margin-left: 0em;
+      margin-right: 0em;
+    } 
+    .column { 
+      display: flex; 
+      flex-direction: column; 
+      flex-flow: row wrap;
+  
+      align-content: space-evenly;
+      /* justify-content: space-between; */
+    }
+    .column img {  
+      width: 180px;
+      max-height: 180px;
+      height: auto;
+    
+    
+      transition: .8s opacity;
+    } 
+  
+    .gallerySideBar {
+      display: none;
+    }
+    
+}
+  
+      
+  
