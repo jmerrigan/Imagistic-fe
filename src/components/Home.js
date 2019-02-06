@@ -5,11 +5,11 @@ class Home extends Component {
 
   state = {
     background:[
-      'https://res.cloudinary.com/dx0fhazu1/image/upload/v1548302393/divine_light.jpg',
-      'https://res.cloudinary.com/dx0fhazu1/image/upload/v1548302393/Pelican_Study.jpg',
-      'https://res.cloudinary.com/dx0fhazu1/image/upload/v1548302393/_MG_5366.jpg',
-      'https://res.cloudinary.com/dx0fhazu1/image/upload/v1548302393/Theres_a_Sunset_Somewhere_x_3.jpg',
-      'http://res.cloudinary.com/dx0fhazu1/image/upload/v1548978869/cuysnnkmqyltqx0ieoyb.jpg'
+      'https://res.cloudinary.com/dx0fhazu1/image/upload/w_1600,h_1080/v1548302393/divine_light.jpg',
+      'https://res.cloudinary.com/dx0fhazu1/image/upload/w_1600,h_1080/v1548979426/iollsrqfzhr1grvo1a29.jpg',
+      'https://res.cloudinary.com/dx0fhazu1/image/upload/w_1600,h_1080/v1548302393/_MG_5366.jpg',
+      'https://res.cloudinary.com/dx0fhazu1/image/upload/w_1600,h_1080/v1548302393/Theres_a_Sunset_Somewhere_x_3.jpg',
+      'http://res.cloudinary.com/dx0fhazu1/image/upload/w_1600,h_1080/v1548978869/cuysnnkmqyltqx0ieoyb.jpg'
   ], 
     counter: 0};
 
