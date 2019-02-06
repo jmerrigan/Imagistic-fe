@@ -102,7 +102,7 @@
 }
 
 #lightbox-overlay.visible img{
-  margin-top: 2vh;
+  margin-top: 3vh;
   padding: 2em;
   max-height:80%;
   width: auto;
@@ -114,6 +114,7 @@
   color: white;
   position: absolute;
   top: 0;
+  font-size: 1.3em;
   
 }
 

@@ -69,7 +69,7 @@ class Gallery extends Component {
       }
       lightboxImg.src = "";
       newImg.src = element.getAttribute('data-lightbox');
-      imageTitle.innerText = "Title: " + element.getAttribute('title')
+      imageTitle.innerText = element.getAttribute('title')
       imageDescription.innerText = element.getAttribute('description')
       lightbox.classList.add('visible');
     }
