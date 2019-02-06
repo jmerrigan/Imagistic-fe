@@ -58,6 +58,8 @@ class Gallery extends Component {
     const elementID = element.getAttribute('id')
     const lightboxImg = document.getElementById('lightbox-image')
     const lightbox = document.getElementById('lightbox-overlay')
+    const imageDescription = document.getElementById('image-description')
+    const imageTitle = document.getElementById('image-title')
     const newImg = new Image();
 
     if (element.hasAttribute('data-lightbox')) {
@@ -67,6 +69,8 @@ class Gallery extends Component {
       }
       lightboxImg.src = "";
       newImg.src = element.getAttribute('data-lightbox');
+      imageTitle.innerText = "Title: " + element.getAttribute('title')
+      imageDescription.innerText = element.getAttribute('description')
       lightbox.classList.add('visible');
     }
 
@@ -142,13 +146,15 @@ class Gallery extends Component {
           <div className="column">
           {imgArray.map((img, index) => {
             return (
-              <img src={img.image} id={index} onClick={ this.lightboxClick} data-lightbox={img.image} onContextMenu={this.disableMenu} alt="" key={index}/>
+              <img src={img.image} title={img.title} description={img.description} id={index} onClick={ this.lightboxClick} data-lightbox={img.image} onContextMenu={this.disableMenu} alt="" key={index}/>
             )
           })}
           </div>
           <div id="lightbox-overlay">
             <img src="" alt="Lightbox-image" title="Click anywhere to close"
             onClick={this.lightboxClick} id="lightbox-image"/> 
+            <p id="image-title"></p>
+            <p id="image-description"></p>
           </div>
         </div>
       </div>
