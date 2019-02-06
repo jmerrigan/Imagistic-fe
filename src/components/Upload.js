@@ -111,7 +111,7 @@ class Upload extends Component {
 
     return (
       <div className="formContainer">
-          <AdminHeader/>
+          <AdminHeader history={this.props.history} />
           <div className="adminLogoLine"></div>
         <form onSubmit={this.submitForm} className="uploadForm" encType="multipart/form-data">
 
@@ -161,11 +161,15 @@ class Upload extends Component {
 
 
           {/* TAGS */}
-          <label className="uploadFormLabels">Tags : </label>
+          <label className="uploadFormLabels">Selected Tags : </label>
           {tagArray && tagArray.map((tag, index) => {
             return <span className="tagSpan" id={index} onClick={this.deleteTagRecord}>{tag}</span>
           })}
           <br />
+
+          {/* add new tags */}
+          <label className="uploadFormLabels">Add New Tag:</label>
+          <br/>
           <input className="uploadFormInputs" id="tag" onChange={this.handleInput} value={this.state.tag} name="Tags"/>
           
           <button onClick={this.addTag} id="tagSubmit">+</button>

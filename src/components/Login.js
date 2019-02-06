@@ -8,6 +8,13 @@ axios.defaults.withCredentials = true;
 class Login extends Component {
 state = {}
 
+componentDidMount() {
+  const logInCheckUrl = process.env.REACT_APP_BE_URL + "auth/userloggedin"
+  axios.get(logInCheckUrl)
+    .then(res => this.props.history.push('/admin/upload'))
+    .catch(err => console.log('Need to sign in'))
+};
+
 handleInput = (e) => {
   const { value, id } = e.currentTarget;
   this.setState({ [id]: value });
