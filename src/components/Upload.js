@@ -72,7 +72,7 @@ class Upload extends Component {
     data.append('description', description);
     data.append('selectedAlbumArray', selectedAlbumArray);
     axios.post(url, data)
-      .then(res => console.log(res))
+      .then(res => window.location.reload())
       .catch(err => console.log(err))
     console.log(tagArray)
   };
@@ -80,14 +80,14 @@ class Upload extends Component {
   deleteAlbumRecord = (e) => {
     const { selectedAlbumArray } = this.state
     const albumIndex = e.target.id
-    selectedAlbumArray.splice(albumIndex)
+    selectedAlbumArray.splice(albumIndex, 1)
     this.setState({ selectedAlbumArray })
   }
 
   deleteTagRecord = (e) => {
     const { tagArray } = this.state
     const tagIndex = e.target.id
-    tagArray.splice(tagIndex)
+    tagArray.splice(tagIndex, 1)
     this.setState({ tagArray })
   }
 
@@ -112,69 +112,83 @@ class Upload extends Component {
     return (
       <div className="formContainer">
           <AdminHeader history={this.props.history} />
-          <div className="adminLogoLine"></div>
         <form onSubmit={this.submitForm} className="uploadForm" encType="multipart/form-data">
 
           {/* FILE UPLOAD */}
-          <label className="uploadFormLabels">Select Image to Upload</label>
           
-          <input type="file" name="myImage" id="myImage" accept="image/*" className="uploadFormInputs"/>
-          <br/>
-
-
-          {/* TITLE */}
-          <label className="uploadFormLabels">Title : </label>
-          <br/>
-          <input id="title" name="title" onChange={this.handleInput} type="text" className="uploadFormInputs"/>
-          <br/>
-
-
+            <label className="uploadFormLabels" id="uploadLabel">Select Image to Upload : </label>
+            
+            <input type="file" name="myImage" id="myImage" accept="image/*" className="uploadFormInputs"/> 
+      
+            {/* TITLE */}
+            <label className="uploadFormLabels" id="titleLabel" >Title : </label>
+        
+            <input id="title" name="title" onChange={this.handleInput} type="text" className="uploadFormInputs"/>
+        
           {/* DESCRIPTION */}
-          <label className="uploadFormLabels">Description : </label>
-          <br/>
-          <textarea id="description" name="description" onChange={this.handleInput} rows="8" cols="60" ></textarea>
-          <br/>
+          
+            <label className="uploadFormLabels" id="descLabel">Description : </label>
+            <textarea id="description" name="description" onChange={this.handleInput} rows="3" cols="60" ></textarea>
 
 
           {/* ALBUMS */}
-          <label>Selected Albums : </label>
-          {selectedAlbumArray && selectedAlbumArray.map((album, index) => {
-            return <span className="tagSpan" id={index} onClick={this.deleteAlbumRecord}>{album}</span>
-          })}
-          <br/>
-          <label className="uploadFormLabels">Create New Album</label>
-          <br/>
+            <label id="assignedAlbumLabel">Assigned Albums : </label>
+            <div id="assignedAlbums">
+            {selectedAlbumArray && selectedAlbumArray.map((album, index) => {
+              return (
+                <div className="albumCard" onClick={this.deleteAlbumRecord}>
+                  <p className="albumPara" id={index}>{album}</p>
+                  <p className="delete">Delete</p>
+                </div>
+                )
+            })}
+            </div>
+  
+         
+            <label className="uploadFormLabels" id="existingAlbumLabel">From Existing Albums : </label>
+            
+            <div id="albumDropAndButton">
+            <select name="albumList" id="albumList" onChange={this.handleSelection}>
+              <option disabled selected value> Select an Album </option>
+              {uniqueAlbums && uniqueAlbums.map(album => {
+                return <option>{album}</option>
+              })}
+            </select>
+            <button onClick={this.addExisitingAlbum} id="albumSubmit">+</button>
+            </div>
+          
+          <label className="uploadFormLabels" id="createAlbumLabel">Create New Album : </label>
+          
+          <div id="albumInputAndButton">
           <input type="text" name="album" id="album" onChange={this.handleInput} value={this.state.album}/>
           <button onClick={this.addAlbum} id="albumSubmit">+</button>
-          <br/>
-          <label className="uploadFormLabels">Select From Existing Albums</label>
-          <br/>
-          <select name="albumList" id="albumList" onChange={this.handleSelection}>
-            <option disabled selected value> -- select an option -- </option>
-            {uniqueAlbums && uniqueAlbums.map(album => {
-              return <option>{album}</option>
-            })}
-          </select>
-          <button onClick={this.addExisitingAlbum} id="albumSubmit">+</button>
-          <br/>
-
-
-
+          </div>
+        
           {/* TAGS */}
-          <label className="uploadFormLabels">Selected Tags : </label>
+          <label className="uploadFormLabels" id="assignedTagsLabel">Assigned Tags : </label>
+          <div id="assignedTags">
           {tagArray && tagArray.map((tag, index) => {
-            return <span className="tagSpan" id={index} onClick={this.deleteTagRecord}>{tag}</span>
+            return (
+              <div className="tagCard" onClick={this.deleteTagRecord}>
+                <p className="tagPara" id={index}>{tag}</p>
+                <p className="delete">Delete</p>
+              </div>
+            )
           })}
-          <br />
+          </div>
 
           {/* add new tags */}
-          <label className="uploadFormLabels">Add New Tag:</label>
-          <br/>
-          <input className="uploadFormInputs" id="tag" onChange={this.handleInput} value={this.state.tag} name="Tags"/>
           
-          <button onClick={this.addTag} id="tagSubmit">+</button>
-          <br/>
-          <input type="submit" value="submit" id="sumbitForm" />
+            <label className="uploadFormLabels" id="addTagLabel">Add New Tag :</label>
+            <br/>
+            <div id="tagInputAndButton">
+            <input className="uploadFormInputs" id="tag" onChange={this.handleInput} value={this.state.tag} name="Tags"/>
+            
+            <button onClick={this.addTag} id="tagSubmit">+</button>
+            </div>
+          
+
+          <input type="submit" value="Upload Photo" id="sumbitForm"/>
 
         </form> 
       </div>
