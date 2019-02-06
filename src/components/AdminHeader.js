@@ -23,7 +23,8 @@ class AdminHeader extends Component {
                 <div className="adminLinkContainer">
                     <Link to="/admin/upload" className="adminLinks">UPLOAD</Link>
                     <Link to="/admin/manage" className="adminLinks">MANAGE</Link>
-                    <div className="logoutContainer"><Link to="" className="logout" onClick={this.logoutUser}>LOGOUT</Link>
+                    <div className="logoutContainer">
+                        <Link to="" className="logout" onClick={this.logoutUser}>LOGOUT</Link>
                     </div>
                 </div>
                 <div id="adminHeader">
