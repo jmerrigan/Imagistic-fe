@@ -197,6 +197,7 @@
 
 .tagCard:hover, .albumCard:hover {
     background-color: #fa7268;
+    z-index: 9;
 }
 
 .albumCard p, .tagCard p {
