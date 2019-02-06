@@ -169,7 +169,7 @@
     margin: 0.5em;
 }
 
-input[type=submit] {
+.uploadForm input[type=submit] {
     background-color: #fa7268;
     border: none;
     border-radius: 5px;

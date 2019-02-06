@@ -188,7 +188,7 @@ class Upload extends Component {
             </div>
           
 
-          <input type="submit" value="Upload Photo" id="sumbitForm"/>
+          <input type="submit" value="Upload Photo" id="submitForm"/>
 
         </form> 
       </div>
