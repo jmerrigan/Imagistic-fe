@@ -60,7 +60,7 @@
     grid-column: 1/2;
     grid-row: 4/5;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center; 
     margin-right: 0.5em;
     height: 4em;
@@ -131,7 +131,7 @@
 #assignedTagsLabel {
     grid-column: 1/2;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     height: 3em;
 }
