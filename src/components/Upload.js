@@ -91,7 +91,6 @@ class Upload extends Component {
           window.location.reload()}
           })
       .catch(err => {
-          console.log(err)
           this.setState({ errorMessage: "Error uploading image. Please try aagin"})})
   };
 
