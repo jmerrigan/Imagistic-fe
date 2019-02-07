@@ -35,7 +35,7 @@ class Upload extends Component {
   };
 
   // function that adds an album from a list of existing albums to the selectAlbumArray
-  addExisitingAlbum = (e) => {
+  addExistingAlbum = (e) => {
     e.preventDefault()
     const { albumList } = this.state
     if (albumList) {
@@ -174,7 +174,7 @@ class Upload extends Component {
                 return <option>{album}</option>
               })}
             </select>
-            <button onClick={this.addExisitingAlbum} id="albumSubmit">+</button>
+            <button onClick={this.addExistingAlbum} id="albumSubmit">+</button>
             </div>
           
           <label className="uploadFormLabels" id="createAlbumLabel">Create New Album : </label>

@@ -44,7 +44,6 @@ class Gallery extends Component {
       selectedTagsArray.push(e.target.id)
     }
     this.props.tagFilter(selectedTagsArray)
-    console.log(selectedTagsArray)
   }
 
   // function to disable the ability to right click on an image
