@@ -17,12 +17,10 @@ class ManageImages extends Component {
     albumToggle: false
   }
 
-  
-
-  // this function will update the prop.selectedAlbumOption value to a new value when clicked
-  // then passes the value back to App.js
-
   componentDidMount() {
+
+    // check if the user is logged in and has a session
+    // if there is no session, redirect user to the login page
     const logInCheckUrl = process.env.REACT_APP_BE_URL + "auth/userloggedin"
     axios.get(logInCheckUrl)
       .then(res => console.log(res))
@@ -31,7 +29,8 @@ class ManageImages extends Component {
 
 
 
-  // Album related functions
+  // ALBUM RELATED FUNCTIONS
+
   albumHandler = (e) => {
     const { currentAlbumSelected, albumToggle } = this.state
     // this.props.selectedAlbumOption(e.target.id)
@@ -53,6 +52,7 @@ class ManageImages extends Component {
     }
   }
 
+  // function that deletes an album from the selectedAlbumArray
   deleteAlbumRecord = (e) => {
     const { selectedAlbumArray } = this.state
     const albumIndex = e.currentTarget.id
@@ -60,6 +60,7 @@ class ManageImages extends Component {
     this.setState({ selectedAlbumArray })
   }
 
+  // function that adds an album to the selectedAlbumArray
   addAlbum = (e) => {
     e.preventDefault()
     const currentAlbum = this.state.album
@@ -71,7 +72,8 @@ class ManageImages extends Component {
     }
   };
 
-  addExisitingAlbum = (e) => {
+  // function that adds an album from a list of existing albums to the selectAlbumArray
+  addExistingAlbum = (e) => {
     e.preventDefault()
     const { albumList } = this.state
     if (albumList) {
@@ -84,7 +86,8 @@ class ManageImages extends Component {
 
   
   
-  // Tag related functions
+  // TAG RELATED FUNCTIONS
+
   tagHandler = (e) => {
     const { selectedTagsArray } = this.state
     const result = selectedTagsArray.findIndex( tag => tag === e.target.id );
@@ -96,6 +99,7 @@ class ManageImages extends Component {
     this.props.tagFilter(selectedTagsArray)
   }
   
+  // function that deletes a tag from the tagArray
   deleteTagRecord = (e) => {
     const { tagArray } = this.state
     const tagIndex = e.currentTarget.id
@@ -103,6 +107,7 @@ class ManageImages extends Component {
     this.setState({ tagArray })
   }
 
+  // function that adds a tag to the tagArray
   addTag = (e) => {
     e.preventDefault()
     const currentTag = this.state.tag
@@ -128,7 +133,7 @@ class ManageImages extends Component {
     this.setState({ [id]: value });
   }
   
-  // function used for selecting exisiting albums
+  // function used for selecting existing albums
   handleSelection = (e) => {
     const albumList = e.target.value
     this.setState({ albumList })
@@ -138,7 +143,6 @@ class ManageImages extends Component {
   // CRUD functions 
   deleteImage = img => e => {
     const url = process.env.REACT_APP_BE_URL + `auth/photo/${img}`
-    console.log(url)
     axios.delete(url)
       .then(res => window.location.reload())
       .catch(err => console.log(err))
@@ -164,7 +168,6 @@ class ManageImages extends Component {
     const url = process.env.REACT_APP_BE_URL + `auth/photo/${editID}`
     axios.patch(url, {title, description, album, tags})
       .then(res => {
-        console.log(res)
         window.location.reload()
       })
       .catch(err => console.log(err))
@@ -246,7 +249,7 @@ class ManageImages extends Component {
             return (
               <div className="managePhoto">
                 <img src={img.image} id={index} onClick={ this.lightboxClick} data-lightbox={img.image} onContextMenu={this.disableMenu} alt="" key={index}/>
-                <span><button onClick={this.editImage(img)}>Edit</button> <button onClick={this.deleteImage(img._id)}>Delete</button></span>
+                <span><button id="editButton" onClick={this.editImage(img)}>Edit</button> <button id="deleteButton" onClick={this.deleteImage(img._id)}>Delete</button></span>
               </div>
             )
           })}
@@ -287,7 +290,7 @@ class ManageImages extends Component {
                   return <option>{album}</option>
                 })}
               </select>
-              <button onClick={this.addExisitingAlbum} id="albumSubmit">+</button>
+              <button onClick={this.addExistingAlbum} id="albumSubmit">+</button>
               </div>
 
               {/* creating new album */}

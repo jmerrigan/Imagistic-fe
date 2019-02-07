@@ -16,7 +16,6 @@
   position: sticky;
   top: 10px;
   margin: 0.1em;
-  /* background-color: teal; */
   min-width: 20vw;
   max-width: 20vw;
   height: 100vh;
@@ -83,12 +82,10 @@
 }
 
 #lightbox-overlay {
-  /* visibility: hidden; */
   display: none;
 }
 
 #lightbox-overlay.visible {
-  /* visibility: visible; */
   display: flex;
   position: fixed;
   justify-content: center;
@@ -98,7 +95,6 @@
   top: 0;
   left: 0;
   background: rgba(0,0,0,0.8);
-
 }
 
 #lightbox-overlay.visible img{
@@ -127,8 +123,6 @@
   cursor: all-scroll;
   width: 400px;
   text-align: center;
-
-
 }
 
 #loading {
@@ -154,7 +148,6 @@
 }
 
 #editFormContainer.visible {
-  /* visibility: visible; */
   display: flex;
   position: fixed;
   justify-content: center;
@@ -204,7 +197,6 @@
     flex-flow: row wrap;
 
     align-content: space-evenly;
-    /* justify-content: space-between; */
   }
   .column img {  
     width: 180px;
