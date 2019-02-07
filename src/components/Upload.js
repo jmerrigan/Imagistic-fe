@@ -13,12 +13,16 @@ class Upload extends Component {
   };
 
   componentDidMount() {
+
+    // check if the user is logged in and has a session
+    // if there is no session, redirect user to the login page
     const logInCheckUrl = process.env.REACT_APP_BE_URL + "auth/userloggedin"
     axios.get(logInCheckUrl)
       // .then(res => res.send("Hi"))
       .catch(err => this.props.history.push('/admin/login'))
   }
 
+  // function that adds an album to the selectedAlbumArray
   addAlbum = (e) => {
     e.preventDefault()
     const currentAlbum = this.state.album
@@ -30,6 +34,7 @@ class Upload extends Component {
     }
   };
 
+  // function that adds an album from a list of existing albums to the selectAlbumArray
   addExisitingAlbum = (e) => {
     e.preventDefault()
     const { albumList } = this.state
@@ -40,6 +45,7 @@ class Upload extends Component {
     }
   }
 
+  // function that adds a tag to the tagArray
   addTag = (e) => {
     e.preventDefault()
     const currentTag = this.state.tag
@@ -51,22 +57,25 @@ class Upload extends Component {
     }
   };
 
+  // function that keeps track of what is being inputted, used for creating a new tag and creating a new album
   handleInput = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value });
   }
 
+  // function that keeps track of what is being selected, used for selecting from a existing album
   handleSelection = (e) => {
     const albumList = e.target.value
     this.setState({ albumList })
   }
 
+  // submits the form to the server
+  // refreshes the page upon success, other wise displays an error message
   submitForm = (e) => {
     e.preventDefault();
     const data = new FormData();
     const url = process.env.REACT_APP_BE_URL + "auth/photo/upload"
     const { tagArray, title, description, selectedAlbumArray } = this.state
-    console.log(e.target.myImage.files[0])
     data.append('file', e.target.myImage.files[0]);
     data.append('tagArray', tagArray);
     data.append('title', title);
@@ -84,9 +93,9 @@ class Upload extends Component {
       .catch(err => {
           console.log(err)
           this.setState({ errorMessage: "Error uploading image. Please try aagin"})})
-    console.log(tagArray)
   };
 
+  // function that deletes an album from the selectedAlbumArray
   deleteAlbumRecord = (e) => {
     const { selectedAlbumArray } = this.state
     const albumIndex = e.currentTarget.id
@@ -94,6 +103,7 @@ class Upload extends Component {
     this.setState({ selectedAlbumArray })
   }
 
+  // function that deletes a tag from the tagArray
   deleteTagRecord = (e) => {
     const { tagArray } = this.state
     const tagIndex = e.currentTarget.id

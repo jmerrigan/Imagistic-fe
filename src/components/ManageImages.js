@@ -94,7 +94,6 @@ class ManageImages extends Component {
       selectedTagsArray.push(e.target.id)
     }
     this.props.tagFilter(selectedTagsArray)
-    console.log(selectedTagsArray)
   }
   
   deleteTagRecord = (e) => {
@@ -138,7 +137,6 @@ class ManageImages extends Component {
 
   // CRUD functions 
   deleteImage = img => e => {
-    console.log(img)
     const url = process.env.REACT_APP_BE_URL + `auth/photo/${img}`
     console.log(url)
     axios.delete(url)
@@ -147,13 +145,11 @@ class ManageImages extends Component {
   };
 
   editImage = img => e => {
-    console.log(img)
     const formID = document.getElementById('editFormContainer')
     const formTitle = document.getElementById('title')
     const formDescription = document.getElementById('description')
 
     this.setState({ title: img.title, description: img.description, editID: img._id, selectedAlbumArray: img.album, tagArray: img.tags })
-    console.log(formDescription)
     formTitle.value = img.title
     formDescription.value = img.description
     formID.classList.add('visible')
@@ -165,7 +161,6 @@ class ManageImages extends Component {
     const { title, description, editID, selectedAlbumArray, tagArray } = this.state
     const tags = tagArray
     const album = selectedAlbumArray
-    console.log(description);
     const url = process.env.REACT_APP_BE_URL + `auth/photo/${editID}`
     axios.patch(url, {title, description, album, tags})
       .then(res => {
