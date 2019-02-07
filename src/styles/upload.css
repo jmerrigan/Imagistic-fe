@@ -169,6 +169,12 @@
     margin: 0.5em;
 }
 
+.uploadError {
+    text-align: center;
+    color: red;
+    margin-bottom: 30px;
+}
+
 .uploadForm input[type=submit] {
     background-color: #fa7268;
     border: none;
