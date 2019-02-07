@@ -349,14 +349,11 @@
       flex-flow: row wrap;
   
       align-content: space-evenly;
-      /* justify-content: space-between; */
     }
     .column img {  
       width: 180px;
       max-height: 180px;
       height: auto;
-    
-    
       transition: .8s opacity;
     } 
   

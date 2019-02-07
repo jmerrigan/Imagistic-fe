@@ -25,19 +25,15 @@
 .contactPicture {
   height: 30em;
   width: 40em;
-  /* background-color:red; */
   box-sizing: border-box;
   margin: 0 auto;
-  /* margin-top: 1em; */
   background-image: url('http://res.cloudinary.com/dx0fhazu1/image/upload/v1548978231/kmh2repxes8zwgrpscyx.jpg');
-  /* (../sampleGroupPic.png); */
   background-size: cover;
 }
 
 .contact {
   height: 30em;
   width: 30em;
-  /* background-color:lightgreen; */
   box-sizing: border-box;
   margin: 0 auto;
 }
@@ -66,8 +62,6 @@
 }
 
 .contactForm input {
-  /* position: relative; */
-  /* display: block; */
   margin: 0 auto;
   text-align: center;
   background-color: transparent;
@@ -78,9 +72,6 @@
   height: 3em;
 } 
  .contactForm textarea {
-   /* position: relative; */
-  /* font-family: 'Poppins', sans-serif; */
-   /* display: inline-block; */
   height: 5em;
   width: 18em;
   text-align: center;
@@ -88,7 +79,8 @@
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #fa7268;
-  /* margin-left: 6em; */
+  font-family: poppins;
+  resize: vertical;
 } 
 
 .contactForm button {
@@ -123,7 +115,6 @@
   .contactContainer {
     display: flex;
     flex-basis: calc(50% - 5px); 
-    /* flex-flow: wrap-reverse; */
     justify-content: space-around;
     align-items: flex-start;
     width: 100% !important;
@@ -183,7 +174,6 @@
   .contactContainer {
     display: flex;
     flex-basis: calc(50% - 5px); 
-    /* flex-flow: wrap-reverse; */
     justify-content: space-around;
     align-items: flex-start;
     width: 100% !important;
