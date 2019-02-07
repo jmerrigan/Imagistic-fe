@@ -1,4 +1,4 @@
-.formContainer {
+.uploadForm .formContainer {
     width: 100vw;
     height: 100vh;
     color: #36454F;
@@ -11,22 +11,22 @@
     padding-top: 1em;
 }
 
-#uploadLabel {
+.uploadForm #uploadLabel {
     text-align: right;
 }
 
-#myImage {
+.uploadForm #myImage {
     color: #fa7268;
     font-size: 1em;
 }
 
-#titleLabel {
+.uploadForm #titleLabel {
     grid-column: 1/2;
     text-align: right;
     justify-self: auto;
 }
 
-#title {
+.uploadForm #title {
     width: 49%;
     text-decoration: none;
     border: none;
@@ -37,12 +37,12 @@
     margin-left: 1em;
 }
 
-#descLabel{
+.uploadForm #descLabel{
     grid-column: 1/2;
     text-align: right;
 }
     
-#description {
+.uploadForm #description {
     width: 47%;
     padding: 12px;
     border: 1px solid #fa7268;
@@ -56,7 +56,7 @@
     margin-bottom: 0.5em;
     }
 
- #assignedAlbumLabel {
+.uploadForm #assignedAlbumLabel {
     grid-column: 1/2;
     grid-row: 4/5;
     display: flex;
@@ -67,13 +67,13 @@
  }
 
  
-#existingAlbumLabel {
+.uploadForm #existingAlbumLabel {
     grid-column: 1/2;
     grid-row: 5/6;
     text-align: right;
 }
 
-#albumList {
+.uploadForm #albumList {
     width: 43.25em;
     height: 3em;
     text-align: center;
@@ -82,19 +82,19 @@
     color: #36454F;
 }
 
-#albumDropAndButton {
+.uploadForm #albumDropAndButton {
     grid-column: 2/3;
     grid-row: 5/6;
     padding-left: 1em;
 }
 
- #createAlbumLabel {
+.uploadForm #createAlbumLabel {
      grid-column: 1/2;
      grid-row: 6/7;
      text-align: right;
  }
 
- #album {
+.uploadForm #album {
     grid-row: 8/9;
     width: 49%;
     border: none;
@@ -105,11 +105,11 @@
     margin-left: 1em;
 }
 
-#assignedAlbums, #assignedTags {
+.uploadForm #assignedAlbums, #assignedTags {
     margin-left: 0.35em;
 }
 
-#albumInputAndButton {
+.uploadForm #albumInputAndButton {
     grid-column: 2/3;
     grid-row: 6/7;
 }
@@ -123,12 +123,12 @@
     padding: 0.5em;
 }
 
-#assignedAlbums {
+.uploadForm #assignedAlbums {
     grid-column: 2/3;
     grid-row: 4/5;
 }
 
-#assignedTagsLabel {
+.uploadForm #assignedTagsLabel {
     grid-column: 1/2;
     display: flex;
     justify-content: flex-end;
@@ -136,17 +136,17 @@
     height: 3em;
 }
 
-#addTagLabel {
+.uploadForm #addTagLabel {
     grid-column: 1/2;
     text-align: right;
 }
 
-#tagInputAndButton {
+.uploadForm #tagInputAndButton {
     grid-column: 2/3;
     grid-row: 8/9;
 }
 
-#tag {
+.uploadForm #tag {
     width: 49%;
     border: none;
     border-bottom: 1px solid #fa7268;
@@ -159,11 +159,11 @@
 
 
 
-#albumSubmit, #tagSubmit {
+.uploadForm #albumSubmit, #tagSubmit {
     background-color: #fa7268;
     border: none;
     border-radius: 5px;
-    color: #36454F;
+    color: white;
     width: 3em;
     height: 3em;
     margin: 0.5em;
@@ -205,6 +205,6 @@
 }
 
 
-.uploadFormLabels, .uploadFormInputs, .createAlbum-group, .existingAlbum-group, .desc-group {
+.uploadForm .uploadFormLabels, .uploadForm .uploadFormInputs {
     margin: 0.5em;
 }

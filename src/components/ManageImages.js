@@ -267,7 +267,7 @@ class ManageImages extends Component {
 
               {/* DESCRIPTION */}
               <label className="uploadFormLabels" id="descLabel">Description : </label>
-              <textarea id="description" name="description" onChange={this.handleInput} rows="3" cols="60" ></textarea>
+              <textarea id="description" name="description" onChange={this.handleInput} ></textarea>
 
 
               {/* ALBUMS */}
@@ -321,14 +321,15 @@ class ManageImages extends Component {
               <label className="uploadFormLabels" id="addTagLabel">Add New Tag :</label>
               <br/>
               <div id="tagInputAndButton">
-              <input className="uploadFormInputs" id="tag" onChange={this.handleInput} value={this.state.tag} name="Tags"/>
+              <input type="text" className="uploadFormInputs" id="tag" onChange={this.handleInput} value={this.state.tag} name="Tags"/>
               
               <button onClick={this.addTag} id="tagSubmit">+</button>
               </div>
 
-
+              <div id="submitAndCancel">
               <input type="submit" value="Submit" id="sumbitForm" onClick={this.submitEdit} />
-              <button onClick={this.closeEdit}>Cancel</button>
+              <button id="cancelButton" onClick={this.closeEdit}>Cancel</button>
+              </div>
             </form>
           </div>
 
