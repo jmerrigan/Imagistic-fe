@@ -8,7 +8,8 @@ axios.defaults.withCredentials = true;
 class Upload extends Component {
   state = {
     tagArray: [],
-    selectedAlbumArray: []
+    selectedAlbumArray: [],
+    errorMessage: null
   };
 
   componentDidMount() {
@@ -72,8 +73,17 @@ class Upload extends Component {
     data.append('description', description);
     data.append('selectedAlbumArray', selectedAlbumArray);
     axios.post(url, data)
-      .then(res => window.location.reload())
-      .catch(err => console.log(err))
+      .then(res => {
+          if (res.data.message){
+            this.setState({errorMessage: "Image exceeds 10mb limit. Please try again"})
+          }
+          else {
+          this.setState({ errorMessage: null})
+          window.location.reload()}
+          })
+      .catch(err => {
+          console.log(err)
+          this.setState({ errorMessage: "Error uploading image. Please try aagin"})})
     console.log(tagArray)
   };
 
@@ -92,7 +102,7 @@ class Upload extends Component {
   }
 
   render() {
-    const { tagArray, selectedAlbumArray } = this.state
+    const { tagArray, selectedAlbumArray, errorMessage } = this.state
 
     const { fullImgArray } = this.props
     let albumsArray = []
@@ -191,6 +201,7 @@ class Upload extends Component {
           <input type="submit" value="Upload Photo" id="submitForm"/>
 
         </form> 
+        {errorMessage && <p className="uploadError">{errorMessage}</p>}
       </div>
     );
   }
