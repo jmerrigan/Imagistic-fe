@@ -34,7 +34,7 @@ class Gallery extends Component {
     }
   }
 
-
+  // function that checks the current tag/s being selected and filtering them through the album they belong to
   tagHandler = (e) => {
     const { selectedTagsArray } = this.state
     const result = selectedTagsArray.findIndex( tag => tag === e.target.id );
@@ -47,17 +47,20 @@ class Gallery extends Component {
     console.log(selectedTagsArray)
   }
 
+  // function to disable the ability to right click on an image
   disableMenu = (e) => {
     e.preventDefault();
   }
 
   
-
+  // function to make the selected image pop up to the screen, also returns the images title and description
   lightboxClick = (e) => {
     const element = e.target
     const elementID = element.getAttribute('id')
     const lightboxImg = document.getElementById('lightbox-image')
     const lightbox = document.getElementById('lightbox-overlay')
+    const imageDescription = document.getElementById('image-description')
+    const imageTitle = document.getElementById('image-title')
     const newImg = new Image();
 
     if (element.hasAttribute('data-lightbox')) {
@@ -67,6 +70,8 @@ class Gallery extends Component {
       }
       lightboxImg.src = "";
       newImg.src = element.getAttribute('data-lightbox');
+      imageTitle.innerText = element.getAttribute('title')
+      imageDescription.innerText = element.getAttribute('description')
       lightbox.classList.add('visible');
     }
 
@@ -99,7 +104,7 @@ class Gallery extends Component {
         })
       }
 
-      // filters through the arrays and returns the unique values inside
+      // filters through both arrays and returns the unique values inside
       var uniqueAlbums = [...new Set(albumsArray)];
       var uniqueTags = [...new Set(tagsArray)]
     }
@@ -142,16 +147,20 @@ class Gallery extends Component {
           <div className="column">
           {imgArray.map((img, index) => {
             return (
-              <img src={img.image} id={index} onClick={ this.lightboxClick} data-lightbox={img.image} onContextMenu={this.disableMenu} alt="" key={index}/>
+              <img src={img.image} title={img.title} description={img.description} id={index} onClick={ this.lightboxClick} data-lightbox={img.image} onContextMenu={this.disableMenu} alt="" key={index}/>
             )
           })}
           </div>
+
+
+          {/* Our image pop up that activates on click of an image */}
           <div id="lightbox-overlay">
             <img src="" alt="Lightbox-image" title="Click anywhere to close"
-            onClick={this.lightboxClick} 
-            onContextMenu={this.disableMenu} 
-            id="lightbox-image"/>
+            onClick={this.lightboxClick} id="lightbox-image"/> 
+            <p id="image-title"></p>
+            <p id="image-description"></p>
           </div>
+
         </div>
       </div>
     );

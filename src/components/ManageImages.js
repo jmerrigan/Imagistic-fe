@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import AdminHeader from './AdminHeader';
+import '../styles/ManageImages.css'
 
 
 axios.defaults.withCredentials = true;
@@ -54,8 +55,8 @@ class ManageImages extends Component {
 
   deleteAlbumRecord = (e) => {
     const { selectedAlbumArray } = this.state
-    const albumIndex = e.target.id
-    selectedAlbumArray.splice(albumIndex)
+    const albumIndex = e.currentTarget.id
+    selectedAlbumArray.splice(albumIndex, 1)
     this.setState({ selectedAlbumArray })
   }
 
@@ -93,13 +94,12 @@ class ManageImages extends Component {
       selectedTagsArray.push(e.target.id)
     }
     this.props.tagFilter(selectedTagsArray)
-    console.log(selectedTagsArray)
   }
   
   deleteTagRecord = (e) => {
     const { tagArray } = this.state
-    const tagIndex = e.target.id
-    tagArray.splice(tagIndex)
+    const tagIndex = e.currentTarget.id
+    tagArray.splice(tagIndex, 1)
     this.setState({ tagArray })
   }
 
@@ -137,7 +137,6 @@ class ManageImages extends Component {
 
   // CRUD functions 
   deleteImage = img => e => {
-    console.log(img)
     const url = process.env.REACT_APP_BE_URL + `auth/photo/${img}`
     console.log(url)
     axios.delete(url)
@@ -146,13 +145,11 @@ class ManageImages extends Component {
   };
 
   editImage = img => e => {
-    console.log(img)
     const formID = document.getElementById('editFormContainer')
     const formTitle = document.getElementById('title')
     const formDescription = document.getElementById('description')
 
     this.setState({ title: img.title, description: img.description, editID: img._id, selectedAlbumArray: img.album, tagArray: img.tags })
-    console.log(formDescription)
     formTitle.value = img.title
     formDescription.value = img.description
     formID.classList.add('visible')
@@ -164,7 +161,6 @@ class ManageImages extends Component {
     const { title, description, editID, selectedAlbumArray, tagArray } = this.state
     const tags = tagArray
     const album = selectedAlbumArray
-    console.log(description);
     const url = process.env.REACT_APP_BE_URL + `auth/photo/${editID}`
     axios.patch(url, {title, description, album, tags})
       .then(res => {
@@ -259,65 +255,76 @@ class ManageImages extends Component {
             <form id="editForm">
 
               {/* TITLE */}
-              <label className="uploadFormLabels">Title : </label>
-              <br />
+              <label className="uploadFormLabels" id="titleLabel" >Title : </label>
+          
               <input id="title" name="title" onChange={this.handleInput} type="text" className="uploadFormInputs"/>
-              <br/>
 
 
               {/* DESCRIPTION */}
-              <label className="uploadFormLabels">Description : </label>
-              <br />
-              <textarea id="description" name="description" onChange={this.handleInput}></textarea>
-              <br/>
+              <label className="uploadFormLabels" id="descLabel">Description : </label>
+              <textarea id="description" name="description" onChange={this.handleInput} ></textarea>
 
 
               {/* ALBUMS */}
-              {/* showing all albums */}
-              <label>Selected Albums : </label>
+              <label id="assignedAlbumLabel">Assigned Albums : </label>
+              <div id="assignedAlbums">
               {selectedAlbumArray && selectedAlbumArray.map((album, index) => {
-                return <span className="tagSpan" id={index} onClick={this.deleteAlbumRecord} id="allAlbums">{album}</span>
+                return (
+                  <div className="albumCard" onClick={this.deleteAlbumRecord} id={index}>
+                    <p className="albumPara">{album}</p>
+                    <p className="delete">Delete</p>
+                  </div>
+                  )
               })}
-              <br/>
-
-              {/* creating new album */}
-              <label className="uploadFormLabels">Create New Album</label>
-              <br/>
-              <input type="text" name="album" id="album" onChange={this.handleInput} value={this.state.album}/>
-              <button onClick={this.addAlbum} id="albumSubmit">+</button>
-              <br/>
+              </div>
 
               {/* selecting from previous albums */}
-              <label className="uploadFormLabels">Select From Existing Albums</label>
-              <br/>
+              <label className="uploadFormLabels" id="existingAlbumLabel">From Existing Albums : </label>
+              <div id="albumDropAndButton">
               <select name="albumList" id="albumList" onChange={this.handleSelection}>
-                <option disabled selected value> -- select an option -- </option>
+                <option disabled selected value> Select an Album </option>
                 {uniqueAlbums && uniqueAlbums.map(album => {
                   return <option>{album}</option>
                 })}
               </select>
               <button onClick={this.addExisitingAlbum} id="albumSubmit">+</button>
-              <br/>
+              </div>
+
+              {/* creating new album */}
+              <label className="uploadFormLabels" id="createAlbumLabel">Create New Album : </label>
+              <div id="albumInputAndButton">
+              <input type="text" name="album" id="album" onChange={this.handleInput} value={this.state.album}/>
+              <button onClick={this.addAlbum} id="albumSubmit">+</button>
+              </div>
+
 
 
               {/* TAGS */}
-              <label className="uploadFormLabels">Tags : </label>
+              <label className="uploadFormLabels" id="assignedTagsLabel">Assigned Tags : </label>
+              <div id="assignedTags">
               {tagArray && tagArray.map((tag, index) => {
-                return <span className="tagSpan" id={index} onClick={this.deleteTagRecord}>{tag}</span>
+                return (
+                  <div className="tagCard" onClick={this.deleteTagRecord} id={index}>
+                    <p className="tagPara">{tag}</p>
+                    <p className="delete">Delete</p>
+                  </div>
+                )
               })}
-              <br />
+              </div>
 
               {/* add new tags */}
-              <label className="uploadFormLabels">Add New Tag:</label>
+              <label className="uploadFormLabels" id="addTagLabel">Add New Tag :</label>
               <br/>
-              <input className="uploadFormInputs" id="tag" onChange={this.handleInput} value={this.state.tag} name="Tags"/>
+              <div id="tagInputAndButton">
+              <input type="text" className="uploadFormInputs" id="tag" onChange={this.handleInput} value={this.state.tag} name="Tags"/>
               
               <button onClick={this.addTag} id="tagSubmit">+</button>
-              <br/>
+              </div>
 
-
+              <div id="submitAndCancel">
               <input type="submit" value="Submit" id="sumbitForm" onClick={this.submitEdit} />
-              <button onClick={this.closeEdit}>Cancel</button>
+              <button id="cancelButton" onClick={this.closeEdit}>Cancel</button>
+              </div>
             </form>
           </div>
 
