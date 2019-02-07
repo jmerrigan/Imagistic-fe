@@ -6,7 +6,9 @@ import '../styles/AdminHeader.css';
 axios.defaults.withCredentials = true;
 
 class AdminHeader extends Component {
-    
+
+
+    // function to send a request to the server to destroy the session
     logoutUser = (e) => {
         e.preventDefault();
         const url = process.env.REACT_APP_BE_URL + "auth/logout"
@@ -23,7 +25,8 @@ class AdminHeader extends Component {
                 <div className="adminLinkContainer">
                     <Link to="/admin/upload" className="adminLinks">UPLOAD</Link>
                     <Link to="/admin/manage" className="adminLinks">MANAGE</Link>
-                    <div className="logoutContainer"><Link to="" className="logout" onClick={this.logoutUser}>LOGOUT</Link>
+                    <div className="logoutContainer">
+                        <Link to="" className="logout" onClick={this.logoutUser}>LOGOUT</Link>
                     </div>
                 </div>
                 <div id="adminHeader">

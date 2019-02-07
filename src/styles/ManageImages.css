@@ -1,0 +1,367 @@
+.galleryPageContainer {
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: column;
+    margin-top: 2em;
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+} 
+  
+.gallerySideBar{
+    position: -webkit-sticky;  
+    position: sticky;
+    top: 10px;
+    margin: 0.1em;
+    /* background-color: teal; */
+    min-width: 20vw;
+    max-width: 20vw;
+    height: 100vh;
+    overflow: scroll;
+    text-align: center;
+    color: #36454F;
+    font-size: 1.4em;
+}
+  
+.albumFilter {
+    border-bottom: solid 1px #fa7268;
+    margin: 0;
+    font-size: 1.15em;
+}
+  
+.albumFilter:hover {
+    cursor: pointer;
+}
+  
+.tagContainer {
+    display: inline-flex;
+    margin: 0;
+    flex-flow: wrap;
+}
+  
+.tagFilter {
+    margin: 0;
+    margin-right: 0.3em;
+}
+  
+.tagFilter label {
+    font-size: 0.85em;
+}
+  
+.column { 
+    display: flex; 
+    flex-flow: row wrap;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    justify-content: flex-start;
+  
+}
+
+.column img {  
+    width: 350px;
+    max-height: 350px;
+    height: auto;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    margin-left: 1.3em;
+    object-fit: cover;
+    transition: .8s opacity;
+} 
+  
+.column:hover img { opacity: 0.6; }
+.column:hover img:hover { opacity: 1; } 
+  
+.filterHeading {
+    font-size: 1.4em;
+}
+  
+  
+#loading {
+    text-align: center;
+}
+  
+.managePhoto img {
+    display: block;
+}
+  
+.managePhoto span {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+  
+.managePhoto button {
+    margin-bottom: 1.5em;
+    background-color: #fa7268;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 3em;
+    width: 10em;
+}
+
+.managePhoto #editButton {
+    background-color: #36454F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 3em;
+    width: 10em;
+}
+  
+#editFormContainer {
+    display: none;
+}
+  
+#editFormContainer.visible {
+    display: flex;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+}
+  
+#editFormContainer.visible form {
+    color: white;
+    padding: 1em;
+    font-size: 1em;
+    height: 80%; 
+    width: 70%;
+    margin-top: 10vh;
+    overflow: scroll;
+    border-radius: 15px;
+}
+  
+#editFormContainer.visible input, button {
+    width: 100px;
+}
+  
+#editFormContainer.visible #description {
+    height: 200px;
+    width: 76%;
+    border: none;
+}
+
+#editForm {
+    display: grid;
+    grid-template-columns: 1.5fr 3fr;
+}
+
+#editForm #titleLabel {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 0.5em;
+}
+
+#editForm #title {
+    font-size: 1em;
+    padding: none;
+    display: flex;
+    align-self: center;
+    margin-left: 0.5em;
+}
+
+#editForm #descLabel {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+}
+
+#editForm #description {
+    padding: 12px;
+    border: 1px solid #fa7268;
+    border-radius: 4px;
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+    font-family: poppins;
+    color: #36454F;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+    resize: vertical;
+}
+
+#editForm #assignedAlbumLabel {
+    grid-row: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 0.5em;
+}
+
+#editForm #existingAlbumLabel {
+    grid-row: 4/5;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 0.5em;
+}
+
+#editForm #albumDropAndButton{
+    grid-column: 2/3;
+    grid-row: 4/5;
+    display: flex;
+    align-items: center;
+    margin-left: 0.5em;
+}
+
+#editForm #assignedAlbums {
+    grid-column: 2/3;
+    grid-row: 3/4;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 50vw;
+}
+
+#editForm #albumList {
+    width: 79.5%;
+    height: 3em;
+    text-align: center;
+    border: 1px solid #fa7268;
+    border-radius: 5px;
+    color: #36454F;
+}
+
+#editForm #createAlbumLabel {
+    grid-row: 5/6;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 0.5em;
+}
+
+#editForm #albumInputAndButton {
+    grid-column: 2/3;
+    grid-row: 5/6;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin-left: 0.5em;
+}
+
+#editForm #album {
+    align-items: flex-start;
+}
+
+#editForm input[type=text] {
+    border: none;
+    border-bottom: 1px solid white;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #36454F;
+    width: 79%;
+    height: 1.6em;
+}
+
+#editForm #assignedTagsLabel {
+    display: flex;
+    justify-content: flex-end;
+    align-self: center;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+}
+
+#editForm #assignedTags {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 50vw;
+}
+
+#editForm #addTagLabel {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 0.5em;
+}
+
+#editForm #tagInputAndButton {
+    grid-row: 7/8;
+    grid-column: 2/3;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin-left: 0.5em;
+}
+
+#editForm input[type=submit] {
+    background-color: #fa7268;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 1em;
+    height: 3em;
+    width: 10em;
+}
+
+#editForm #cancelButton {
+    background-color: #fa7268;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 3em;
+    width: 10em;
+}
+
+#editForm #albumSubmit {
+    margin: 1em;
+    background-color: #fa7268;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    width: 3em;
+    height: 3em;
+}
+
+#editForm #submitAndCancel {
+    display: flex-inline;
+    margin-right: 15em;
+}
+
+#editForm #tagSubmit {
+    margin: 1em;
+    color: white;
+}
+
+@media screen and (max-width: 661px) {
+    .container {
+      display: flex;
+      width: 100vw;
+      flex-wrap: column;
+      margin-top: 0em;
+      margin-left: 0em;
+      margin-right: 0em;
+    } 
+    .column { 
+      display: flex; 
+      flex-direction: column; 
+      flex-flow: row wrap;
+  
+      align-content: space-evenly;
+    }
+    .column img {  
+      width: 180px;
+      max-height: 180px;
+      height: auto;
+      transition: .8s opacity;
+    } 
+  
+    .gallerySideBar {
+      display: none;
+    }
+    
+}
+  
+      
+  
