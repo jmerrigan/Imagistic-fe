@@ -96,7 +96,22 @@
 }
   
 .managePhoto button {
-    margin: 1em;
+    margin-bottom: 1.5em;
+    background-color: #fa7268;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 3em;
+    width: 10em;
+}
+
+.managePhoto #editButton {
+    background-color: #36454F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 3em;
+    width: 10em;
 }
   
 #editFormContainer {

@@ -138,7 +138,6 @@ class ManageImages extends Component {
   // CRUD functions 
   deleteImage = img => e => {
     const url = process.env.REACT_APP_BE_URL + `auth/photo/${img}`
-    console.log(url)
     axios.delete(url)
       .then(res => window.location.reload())
       .catch(err => console.log(err))
@@ -164,7 +163,6 @@ class ManageImages extends Component {
     const url = process.env.REACT_APP_BE_URL + `auth/photo/${editID}`
     axios.patch(url, {title, description, album, tags})
       .then(res => {
-        console.log(res)
         window.location.reload()
       })
       .catch(err => console.log(err))
@@ -246,7 +244,7 @@ class ManageImages extends Component {
             return (
               <div className="managePhoto">
                 <img src={img.image} id={index} onClick={ this.lightboxClick} data-lightbox={img.image} onContextMenu={this.disableMenu} alt="" key={index}/>
-                <span><button onClick={this.editImage(img)}>Edit</button> <button onClick={this.deleteImage(img._id)}>Delete</button></span>
+                <span><button id="editButton" onClick={this.editImage(img)}>Edit</button> <button id="deleteButton" onClick={this.deleteImage(img._id)}>Delete</button></span>
               </div>
             )
           })}
