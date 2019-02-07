@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import Axios from 'axios';
-import './App.css';
 import AboutMe from './components/About';
 import Contact from './components/Contact';
 import Gallery from './components/Gallery';
