@@ -4,6 +4,7 @@ import '../styles/Home.css';
 class Home extends Component {
 
   state = {
+    // the deafult array of images used for the Home/Splash page
     background:[
       'https://res.cloudinary.com/dx0fhazu1/image/upload/w_1600,h_1080/v1548302393/divine_light.jpg',
       'https://res.cloudinary.com/dx0fhazu1/image/upload/w_1600,h_1080/v1548979426/iollsrqfzhr1grvo1a29.jpg',
@@ -15,17 +16,21 @@ class Home extends Component {
 
 
   componentDidMount() {
+
+    // created a timer to run a function that changes the background image every 5000 milliseconds (5 seconds) 
     setInterval(this.imageTransition, 5000)
   }
 
+
+  // function that will change the background image on click
   handleImageClick = () => {
-   console.log(this.state.counter)
     this.setState({counter: this.state.counter + 1})
     if (this.state.counter === 4){
       this.setState({counter: 0})
     }
   }
 
+  // function that changes the background image
   imageTransition = () => {
     this.setState({ counter: this.state.counter + 1 })
     if (this.state.counter === 5) {

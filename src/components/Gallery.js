@@ -34,7 +34,7 @@ class Gallery extends Component {
     }
   }
 
-
+  // function that checks the current tag/s being selected and filtering them through the album they belong to
   tagHandler = (e) => {
     const { selectedTagsArray } = this.state
     const result = selectedTagsArray.findIndex( tag => tag === e.target.id );
@@ -47,12 +47,13 @@ class Gallery extends Component {
     console.log(selectedTagsArray)
   }
 
+  // function to disable the ability to right click on an image
   disableMenu = (e) => {
     e.preventDefault();
   }
 
   
-
+  // function to make the selected image pop up to the screen, also returns the images title and description
   lightboxClick = (e) => {
     const element = e.target
     const elementID = element.getAttribute('id')
@@ -103,7 +104,7 @@ class Gallery extends Component {
         })
       }
 
-      // filters through the arrays and returns the unique values inside
+      // filters through both arrays and returns the unique values inside
       var uniqueAlbums = [...new Set(albumsArray)];
       var uniqueTags = [...new Set(tagsArray)]
     }
@@ -150,12 +151,16 @@ class Gallery extends Component {
             )
           })}
           </div>
+
+
+          {/* Our image pop up that activates on click of an image */}
           <div id="lightbox-overlay">
             <img src="" alt="Lightbox-image" title="Click anywhere to close"
             onClick={this.lightboxClick} id="lightbox-image"/> 
             <p id="image-title"></p>
             <p id="image-description"></p>
           </div>
+
         </div>
       </div>
     );
