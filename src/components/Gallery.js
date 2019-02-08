@@ -155,7 +155,7 @@ class Gallery extends Component {
           {/* Our image pop up that activates on click of an image */}
           <div id="lightbox-overlay">
             <img src="" alt="Lightbox-image" title="Click anywhere to close"
-            onClick={this.lightboxClick} id="lightbox-image"/> 
+            onClick={this.lightboxClick} id="lightbox-image" onContextMenu={this.disableMenu}/> 
             <p id="image-title"></p>
             <p id="image-description"></p>
           </div>
