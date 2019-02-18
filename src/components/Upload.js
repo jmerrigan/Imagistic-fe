@@ -8,16 +8,21 @@ axios.defaults.withCredentials = true;
 class Upload extends Component {
   state = {
     tagArray: [],
-    selectedAlbumArray: []
+    selectedAlbumArray: [],
+    errorMessage: null
   };
 
   componentDidMount() {
+
+    // check if the user is logged in and has a session
+    // if there is no session, redirect user to the login page
     const logInCheckUrl = process.env.REACT_APP_BE_URL + "auth/userloggedin"
     axios.get(logInCheckUrl)
       // .then(res => res.send("Hi"))
       .catch(err => this.props.history.push('/admin/login'))
   }
 
+  // function that adds an album to the selectedAlbumArray
   addAlbum = (e) => {
     e.preventDefault()
     const currentAlbum = this.state.album
@@ -29,7 +34,8 @@ class Upload extends Component {
     }
   };
 
-  addExisitingAlbum = (e) => {
+  // function that adds an album from a list of existing albums to the selectAlbumArray
+  addExistingAlbum = (e) => {
     e.preventDefault()
     const { albumList } = this.state
     if (albumList) {
@@ -39,6 +45,7 @@ class Upload extends Component {
     }
   }
 
+  // function that adds a tag to the tagArray
   addTag = (e) => {
     e.preventDefault()
     const currentTag = this.state.tag
@@ -50,51 +57,63 @@ class Upload extends Component {
     }
   };
 
+  // function that keeps track of what is being inputted, used for creating a new tag and creating a new album
   handleInput = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value });
   }
 
+  // function that keeps track of what is being selected, used for selecting from a existing album
   handleSelection = (e) => {
     const albumList = e.target.value
     this.setState({ albumList })
   }
 
+  // submits the form to the server
+  // refreshes the page upon success, other wise displays an error message
   submitForm = (e) => {
     e.preventDefault();
     const data = new FormData();
     const url = process.env.REACT_APP_BE_URL + "auth/photo/upload"
     const { tagArray, title, description, selectedAlbumArray } = this.state
-    console.log(e.target.myImage.files[0])
     data.append('file', e.target.myImage.files[0]);
     data.append('tagArray', tagArray);
     data.append('title', title);
     data.append('description', description);
     data.append('selectedAlbumArray', selectedAlbumArray);
     axios.post(url, data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
-    console.log(tagArray)
+      .then(res => {
+          if (res.data.message){
+            this.setState({errorMessage: "Image exceeds 10mb limit. Please try again"})
+          }
+          else {
+          this.setState({ errorMessage: null})
+          window.location.reload()}
+          })
+      .catch(err => {
+          this.setState({ errorMessage: "Error uploading image. Please try aagin"})})
   };
 
+  // function that deletes an album from the selectedAlbumArray
   deleteAlbumRecord = (e) => {
     const { selectedAlbumArray } = this.state
-    const albumIndex = e.target.id
-    selectedAlbumArray.splice(albumIndex)
+    const albumIndex = e.currentTarget.id
+    selectedAlbumArray.splice(albumIndex, 1)
     this.setState({ selectedAlbumArray })
   }
 
+  // function that deletes a tag from the tagArray
   deleteTagRecord = (e) => {
     const { tagArray } = this.state
-    const tagIndex = e.target.id
-    tagArray.splice(tagIndex)
+    const tagIndex = e.currentTarget.id
+    tagArray.splice(tagIndex, 1)
     this.setState({ tagArray })
   }
 
   render() {
-    const { tagArray, albumArray, selectedAlbumArray } = this.state
+    const { tagArray, selectedAlbumArray, errorMessage } = this.state
 
-    const { fullImgArray, imgArray, albumResult } = this.props
+    const { fullImgArray } = this.props
     let albumsArray = []
     if (fullImgArray) {
 
@@ -111,68 +130,87 @@ class Upload extends Component {
 
     return (
       <div className="formContainer">
-          <AdminHeader/>
-          <div className="adminLogoLine"></div>
+          <AdminHeader history={this.props.history} />
         <form onSubmit={this.submitForm} className="uploadForm" encType="multipart/form-data">
 
           {/* FILE UPLOAD */}
-          <label className="uploadFormLabels">Select Image to Upload</label>
           
-          <input type="file" name="myImage" id="myImage" accept="image/*" className="uploadFormInputs"/>
-          <br/>
-
-
-          {/* TITLE */}
-          <label className="uploadFormLabels">Title : </label>
-          <br/>
-          <input id="title" name="title" onChange={this.handleInput} type="text" className="uploadFormInputs"/>
-          <br/>
-
-
+            <label className="uploadFormLabels" id="uploadLabel">Select Image to Upload : </label>
+            
+            <input type="file" name="myImage" id="myImage" accept="image/*" className="uploadFormInputs"/> 
+      
+            {/* TITLE */}
+            <label className="uploadFormLabels" id="titleLabel" >Title : </label>
+        
+            <input id="title" name="title" onChange={this.handleInput} type="text" className="uploadFormInputs"/>
+        
           {/* DESCRIPTION */}
-          <label className="uploadFormLabels">Description : </label>
-          <br/>
-          <textarea id="description" name="description" onChange={this.handleInput} rows="8" cols="60" ></textarea>
-          <br/>
+          
+            <label className="uploadFormLabels" id="descLabel">Description : </label>
+            <textarea id="description" name="description" onChange={this.handleInput} rows="3" cols="60" ></textarea>
 
 
           {/* ALBUMS */}
-          <label>Selected Albums : </label>
-          {selectedAlbumArray && selectedAlbumArray.map((album, index) => {
-            return <span className="tagSpan" id={index} onClick={this.deleteAlbumRecord}>{album}</span>
-          })}
-          <br/>
-          <label className="uploadFormLabels">Create New Album</label>
-          <br/>
+            <label id="assignedAlbumLabel">Assigned Albums : </label>
+            <div id="assignedAlbums">
+            {selectedAlbumArray && selectedAlbumArray.map((album, index) => {
+              return (
+                <div className="albumCard" onClick={this.deleteAlbumRecord} id={index}>
+                  <p className="albumPara">{album}</p>
+                  <p className="delete">Delete</p>
+                </div>
+                )
+            })}
+            </div>
+  
+         
+            <label className="uploadFormLabels" id="existingAlbumLabel">From Existing Albums : </label>
+            
+            <div id="albumDropAndButton">
+            <select name="albumList" id="albumList" onChange={this.handleSelection}>
+              <option disabled selected value> Select an Album </option>
+              {uniqueAlbums && uniqueAlbums.map(album => {
+                return <option>{album}</option>
+              })}
+            </select>
+            <button onClick={this.addExistingAlbum} id="albumSubmit">+</button>
+            </div>
+          
+          <label className="uploadFormLabels" id="createAlbumLabel">Create New Album : </label>
+          
+          <div id="albumInputAndButton">
           <input type="text" name="album" id="album" onChange={this.handleInput} value={this.state.album}/>
           <button onClick={this.addAlbum} id="albumSubmit">+</button>
-          <br/>
-          <label className="uploadFormLabels">Select From Existing Albums</label>
-          <br/>
-          <select name="albumList" id="albumList" onChange={this.handleSelection}>
-            <option disabled selected value> -- select an option -- </option>
-            {uniqueAlbums && uniqueAlbums.map(album => {
-              return <option>{album}</option>
-            })}
-          </select>
-          <button onClick={this.addExisitingAlbum} id="albumSubmit">+</button>
-          <br/>
-
-
-
+          </div>
+        
           {/* TAGS */}
-          <label className="uploadFormLabels">Tags : </label>
+          <label className="uploadFormLabels" id="assignedTagsLabel">Assigned Tags : </label>
+          <div id="assignedTags">
           {tagArray && tagArray.map((tag, index) => {
-            return <span className="tagSpan" id={index} onClick={this.deleteTagRecord}>{tag}</span>
+            return (
+              <div className="tagCard" onClick={this.deleteTagRecord} id={index}>
+                <p className="tagPara">{tag}</p>
+                <p className="delete">Delete</p>
+              </div>
+            )
           })}
-          <br />
-          <input className="uploadFormInputs" id="tag" onChange={this.handleInput} value={this.state.tag} name="Tags"/>
+          </div>
+
+          {/* add new tags */}
           
-          <button onClick={this.addTag} id="tagSubmit">+</button>
-          <br/>
-          <input type="submit" value="submit" id="sumbitForm" />
+            <label className="uploadFormLabels" id="addTagLabel">Add New Tag :</label>
+            <br/>
+            <div id="tagInputAndButton">
+            <input className="uploadFormInputs" id="tag" onChange={this.handleInput} value={this.state.tag} name="Tags"/>
+            
+            <button onClick={this.addTag} id="tagSubmit">+</button>
+            </div>
+          
+
+          <input type="submit" value="Upload Photo" id="submitForm"/>
 
         </form> 
+        {errorMessage && <p className="uploadError">{errorMessage}</p>}
       </div>
     );
   }

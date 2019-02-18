@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import AdminHeader from './AdminHeader';
+import '../styles/ManageImages.css'
 
 
 axios.defaults.withCredentials = true;
@@ -16,17 +17,19 @@ class ManageImages extends Component {
     albumToggle: false
   }
 
-  
-
-  // this function will update the prop.selectedAlbumOption value to a new value when clicked
-  // then passes the value back to App.js
-
   componentDidMount() {
+
+    // check if the user is logged in and has a session
+    // if there is no session, redirect user to the login page
     const logInCheckUrl = process.env.REACT_APP_BE_URL + "auth/userloggedin"
     axios.get(logInCheckUrl)
       .then(res => console.log(res))
       .catch(err => this.props.history.push('/admin/login'))
   }
+
+
+
+  // ALBUM RELATED FUNCTIONS
 
   albumHandler = (e) => {
     const { currentAlbumSelected, albumToggle } = this.state
@@ -49,6 +52,41 @@ class ManageImages extends Component {
     }
   }
 
+  // function that deletes an album from the selectedAlbumArray
+  deleteAlbumRecord = (e) => {
+    const { selectedAlbumArray } = this.state
+    const albumIndex = e.currentTarget.id
+    selectedAlbumArray.splice(albumIndex, 1)
+    this.setState({ selectedAlbumArray })
+  }
+
+  // function that adds an album to the selectedAlbumArray
+  addAlbum = (e) => {
+    e.preventDefault()
+    const currentAlbum = this.state.album
+    if (currentAlbum) {
+      this.setState({
+        selectedAlbumArray: [ ...this.state.selectedAlbumArray, currentAlbum ]
+      })
+      this.setState({ album: '' })
+    }
+  };
+
+  // function that adds an album from a list of existing albums to the selectAlbumArray
+  addExistingAlbum = (e) => {
+    e.preventDefault()
+    const { albumList } = this.state
+    if (albumList) {
+      this.setState({ 
+        selectedAlbumArray: [ ...this.state.selectedAlbumArray, albumList]
+       })
+    }
+  }
+  
+
+  
+  
+  // TAG RELATED FUNCTIONS
 
   tagHandler = (e) => {
     const { selectedTagsArray } = this.state
@@ -59,36 +97,63 @@ class ManageImages extends Component {
       selectedTagsArray.push(e.target.id)
     }
     this.props.tagFilter(selectedTagsArray)
-    console.log(selectedTagsArray)
+  }
+  
+  // function that deletes a tag from the tagArray
+  deleteTagRecord = (e) => {
+    const { tagArray } = this.state
+    const tagIndex = e.currentTarget.id
+    tagArray.splice(tagIndex, 1)
+    this.setState({ tagArray })
   }
 
+  // function that adds a tag to the tagArray
+  addTag = (e) => {
+    e.preventDefault()
+    const currentTag = this.state.tag
+    if (currentTag) {
+      this.setState({
+        tagArray: [ ...this.state.tagArray, currentTag ]
+      })
+      this.setState({ tag: '' })
+    }
+  };
+  
+  
+  
+  // Disable right click on images
   disableMenu = (e) => {
     e.preventDefault();
   }
-
+  
+  
+  // record any changes to input boxes
   handleInput = (e) => {
     const { value, id } = e.currentTarget;
     this.setState({ [id]: value });
   }
+  
+  // function used for selecting existing albums
+  handleSelection = (e) => {
+    const albumList = e.target.value
+    this.setState({ albumList })
+  }
 
 
+  // CRUD functions 
   deleteImage = img => e => {
-    console.log(img)
     const url = process.env.REACT_APP_BE_URL + `auth/photo/${img}`
-    console.log(url)
     axios.delete(url)
       .then(res => window.location.reload())
       .catch(err => console.log(err))
   };
 
   editImage = img => e => {
-    console.log(img)
     const formID = document.getElementById('editFormContainer')
     const formTitle = document.getElementById('title')
     const formDescription = document.getElementById('description')
 
-    this.setState({title: img.title, description: img.description, editID: img._id})
-    console.log(formDescription)
+    this.setState({ title: img.title, description: img.description, editID: img._id, selectedAlbumArray: img.album, tagArray: img.tags })
     formTitle.value = img.title
     formDescription.value = img.description
     formID.classList.add('visible')
@@ -96,11 +161,15 @@ class ManageImages extends Component {
   }
 
   submitEdit = (e) => {
-    const { title, description, editID } = this.state
-    console.log(description);
+    e.preventDefault()
+    const { title, description, editID, selectedAlbumArray, tagArray } = this.state
+    const tags = tagArray
+    const album = selectedAlbumArray
     const url = process.env.REACT_APP_BE_URL + `auth/photo/${editID}`
-    axios.patch(url, {title, description})
-      .then(res => console.log(res))
+    axios.patch(url, {title, description, album, tags})
+      .then(res => {
+        window.location.reload()
+      })
       .catch(err => console.log(err))
   };
 
@@ -110,9 +179,12 @@ class ManageImages extends Component {
     formID.classList.remove('visible')
   }
 
+
+
+
   render() {
     const { fullImgArray, imgArray, albumResult } = this.props
-    const { currentAlbumSelected } = this.state
+    const { currentAlbumSelected, tagArray, selectedAlbumArray } = this.state
     let albumsArray = []
     let tagsArray = []
     if (imgArray) {
@@ -143,7 +215,7 @@ class ManageImages extends Component {
     return (
     
       <div className="galleryPageContainer">
-        <AdminHeader />
+        <AdminHeader history={this.props.history} />
         <div className="container">
           <div className="gallerySideBar">
 
@@ -177,23 +249,85 @@ class ManageImages extends Component {
             return (
               <div className="managePhoto">
                 <img src={img.image} id={index} onClick={ this.lightboxClick} data-lightbox={img.image} onContextMenu={this.disableMenu} alt="" key={index}/>
-                <span><button onClick={this.editImage(img)}>Edit</button> <button onClick={this.deleteImage(img._id)}>Delete</button></span>
+                <span><button id="editButton" onClick={this.editImage(img)}>Edit</button> <button id="deleteButton" onClick={this.deleteImage(img._id)}>Delete</button></span>
               </div>
             )
           })}
           </div>
           <div id="editFormContainer">
             <form id="editForm">
-              <label className="uploadFormLabels">Title : </label>
-              <br />
+
+              {/* TITLE */}
+              <label className="uploadFormLabels" id="titleLabel" >Title : </label>
+          
               <input id="title" name="title" onChange={this.handleInput} type="text" className="uploadFormInputs"/>
+
+
+              {/* DESCRIPTION */}
+              <label className="uploadFormLabels" id="descLabel">Description : </label>
+              <textarea id="description" name="description" onChange={this.handleInput} ></textarea>
+
+
+              {/* ALBUMS */}
+              <label id="assignedAlbumLabel">Assigned Albums : </label>
+              <div id="assignedAlbums">
+              {selectedAlbumArray && selectedAlbumArray.map((album, index) => {
+                return (
+                  <div className="albumCard" onClick={this.deleteAlbumRecord} id={index}>
+                    <p className="albumPara">{album}</p>
+                    <p className="delete">Delete</p>
+                  </div>
+                  )
+              })}
+              </div>
+
+              {/* selecting from previous albums */}
+              <label className="uploadFormLabels" id="existingAlbumLabel">From Existing Albums : </label>
+              <div id="albumDropAndButton">
+              <select name="albumList" id="albumList" onChange={this.handleSelection}>
+                <option disabled selected value> Select an Album </option>
+                {uniqueAlbums && uniqueAlbums.map(album => {
+                  return <option>{album}</option>
+                })}
+              </select>
+              <button onClick={this.addExistingAlbum} id="albumSubmit">+</button>
+              </div>
+
+              {/* creating new album */}
+              <label className="uploadFormLabels" id="createAlbumLabel">Create New Album : </label>
+              <div id="albumInputAndButton">
+              <input type="text" name="album" id="album" onChange={this.handleInput} value={this.state.album}/>
+              <button onClick={this.addAlbum} id="albumSubmit">+</button>
+              </div>
+
+
+
+              {/* TAGS */}
+              <label className="uploadFormLabels" id="assignedTagsLabel">Assigned Tags : </label>
+              <div id="assignedTags">
+              {tagArray && tagArray.map((tag, index) => {
+                return (
+                  <div className="tagCard" onClick={this.deleteTagRecord} id={index}>
+                    <p className="tagPara">{tag}</p>
+                    <p className="delete">Delete</p>
+                  </div>
+                )
+              })}
+              </div>
+
+              {/* add new tags */}
+              <label className="uploadFormLabels" id="addTagLabel">Add New Tag :</label>
               <br/>
-              <label className="uploadFormLabels">Description : </label>
-              <br />
-              <textarea id="description" name="description" onChange={this.handleInput}></textarea>
-              <br/>
+              <div id="tagInputAndButton">
+              <input type="text" className="uploadFormInputs" id="tag" onChange={this.handleInput} value={this.state.tag} name="Tags"/>
+              
+              <button onClick={this.addTag} id="tagSubmit">+</button>
+              </div>
+
+              <div id="submitAndCancel">
               <input type="submit" value="Submit" id="sumbitForm" onClick={this.submitEdit} />
-              <button onClick={this.closeEdit}>Cancel</button>
+              <button id="cancelButton" onClick={this.closeEdit}>Cancel</button>
+              </div>
             </form>
           </div>
 

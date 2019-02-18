@@ -5,12 +5,16 @@ margin: 0;
 
 #SplashPage {
     height: 100vh;
-    /* width: 100vw; */
     font-family: 'Poppins', sans-serif;
     background-repeat: none;
     background-size: cover;
-    /* background-position: 60% 100%; */
+    background-position: center;
     /* this will allow the object of the pictures centered */
+    -webkit-transition: background 1.5s;
+    -moz-transition: background 1.5s linear;
+    -o-transition: background 1.5s linear;
+    -ms-transition: background 1.5s linear;
+    transition: background 1.5s linear;
 
 }
 
@@ -47,22 +51,10 @@ margin: 0;
 
     a {
         position: relative;
-        /* display: inline-block; */
-        /* float: left; */
-        /* margin-top: ; */
         justify-content: center;
-        /* margin-left: 15vw; 
-        margin-right: 15vw; */
         padding-left: 1.5em;
-        /* padding-right: 2.5em; */
-
-        
-        /* font-size: 2.5em;
-        font-weight: 800;
-        letter-spacing: 10px;
-        text-decoration: none;
-        color: white; */
     }
+    
     .SplashNavLinks {
         margin-left: 1em;
     }
